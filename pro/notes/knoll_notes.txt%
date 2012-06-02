@@ -1,0 +1,43 @@
+KNOLL NOTES
+
+1. SEMICONDUCTOR DIODE DETECTORS
+
+1.1 INTRODUCTION
+
+**For the material to serve as a good radiation detector, a large fraction of all the carriers created by the passage of the incident radiation should be collected.
+
+**Probability that an electron hole pair thermally generated:
+     p(T) = C T^(3/2) Exp[-Eg/2kT]
+
+*d Trapping Length: mean distance travelled by a carrier before trapping given by (average lifetime * drift velocity) Tao*v
+
+**Structural defects also cause trapping and recombination since they are suitable places for all kind of impurities.
+
+1.2 EFFECT OF IONIZING PARTICLES
+
+*!Ionization Energy, which is different then the band gap, is the minimum energy to create an electron hole pair, and it is largely independent of type of incoming radiation and it's energy. (~3eV Silicon, Germanium). Being at least ten times smaller than the ionization energy of gas filled detectors gives great advantage for statistical error considerations.
+
+**Ionization energy is also temeperature dependent.
+
+*!Since, Poisson Fluctuation assumes all events are independent, statistically, the variance can be different than the poisson variance. The difference is quantized by FANO FACTOR.  F = Obs. Var / Sqrt[E/e]   E:tot. en. e:ion. en.
+
+1.3 SEMICONDUCTORS AS RADIATION DETECTORS
+
+*?Ohmic Contact is non rectifying contact, if an electron or hole is collected  at one electrode, the same carrier species is injected at the opposite electrode to maintain the equilibrium concentrations!!?
+
+*! To avoid high leakage currents and injection, blocking or rectifying contacts are extensively used. ?charge neutrality?? page 350
+
+**reverse biased case, thickness of depletion region: d=(2 eps V / e N)^.5
+**Capacitance per unit area: C = (e eps N / 2 V)^.5
+
+1.4 SEMICONDUCTOR DETECTOR CONFIGURATIONS
+
+1.4.1 Diffused Junction Detector 
+
+**One type diffused on the other type,  there is a huge 'DEAD LAYER' in this detector type, which is a disadvantage since particles and radiation looses energy in this region. Moreover, it causes problems for the collection efficiency.
+
+1.4.2 Surface Barrier Detectors
+
+**They supply very small dead layer, however, since entrance window is very thin, they're sensitive to optical light. Another disadvantage is they are very sensitive to surface dirt. 
+
+1.5 OPERATIONAL CHARACTERISTICS

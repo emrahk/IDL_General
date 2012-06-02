@@ -1,0 +1,105 @@
+qNOTES: 
+Cd Zn Te   Weighting Potential ,Background Reduction
+
+1)	source: ramo, s. Currents induced by electron motion, Proc. I.R.E 39
+	keywords: weighting potential
+
+	The paper describes the method of calculating the induced charge or current for a specified charge motion. 
+	i = E_w e v   where e: charge, v: velocity
+E_w : component in the direction v of that electrid field which would exist at the electron's instantenous position under the following circumstances: electron removed, given electrode raised to unit potential, all other electrodes grounded. 
+	Derivation given, using gauss' law and green's theorem.
+	Basis for almos all remaining arguments.
+------------------------------------------------------------------>>>>>>>>
+
+2)	source: Luke, P.N. et al., Low Energy X-Ray response Ge Detectors with Amorphous Ge Entrance Contacts, IEEE Transactions on Nucl. Sci., Vol41,No4, 94
+	keywords: low energy, Ge, escape peak
+
+	Low energy X-Ray response of Ge detectors discussed. Some information on behaveour of induced charges inside semiconductor given, sources of backgroud discussed.
+
+	Ge preferred upon Si due to its higher absorption coefficient (Q?) . Also Ge offers better energy resolution due tto its smaller ionization energy. (2.97eV comp 3.76 Si)
+
+	Blocking contacts needed for this typ[e of detectors.
+
+	Two features in background. step like background from full energy peak to some lower treshold, a low level background from this treshold to lowest energy measurable.
+	
+	Background is due to > escape of photoelectrons from the active volume,
+                             >the loss of carriers at contacts as a result of charge expansion due to carrier diffusion,
+                             >warm carrier escape,
+                             >trapping at bulk defect sites.
+
+	What's going on in the detector when a x-ray interacts: initially a  photoelectron is ejected from an atomic shell (L or K) following by deexcitation via the emission of either an Auger electron or a fluorescence photon. The fluorescence photon can be absorbed again, or can be lost contributing to the escape peak.
+
+**ASIDE : Escape peak:  if somehow, charge is not totally collected due to some transition, the channel showing the energy response of the event will be shifted to lower part of the spectrum as: Eescpeak = Efull - Etransition. Most of the times it is the transition of the atom to its lower state after ionization, it might be electron positron annihilation also. interestingly in aGe-Ge detector, if aGe layer is thick, L fluorescence lines can be caught in the active volume, and both the line and it's escape peak can be seen in the spectra.
+
+	And then, this photoelectron with or without the auger electron will travel within the crystal lattice, creating a cascade of energeti carriers and subsequently a distribution of electrons and holes. (Q??) The creation of pairs confined to a spherical volume with radius Rp called 'projected range' They begin to expand due to warm carrier effects and diffusion, and under the effect of electric field electrons and holes will move to opposite directions.
+
+	If the dead layer is inside the volume created by the expansions mentioned above, some of the charges are trapped there and can't make to the electrodes! So in this type of configuration, the fraction of charge that is collected increases with increasing interaction depths and electric fields. So different features in the background can be attriuted to incomplete charge collection due to electron range : low energy tail
+                  second expansion: step like feature which can be eliminated by applying high E field. 
+
+	The electron range can be calculated found  as: 0.23micron. It is hard to model step like background. 
+
+	Noise considerations: conduction characterized as 'hopping conduction'(Q??)  Liq. Nit - 10^8 ohm cm. 
+---------------------------------------------------------------->>>>>>>>>>>>>
+
+3)	source: Barret H.H. et al. Charge Transport in Arrays of Semiconductor Gamma Ray Detectors., Phys. Rev. Lett. Vol.75, No1, 95
+	keywords: electrode size, small pixel effect, Green's function, image charge                                                                                                                                     
+ 	The superior performance of strip detector configuration on planar configuration is shown. 
+
+	(HgI2) also considered (Q??) Green function method is used to get the results and are consistent with the weighting potential method!!
+
+	pixel electrodes used. Rp neglected. Electric field considered uniform!!
+diffusion is negligible ----->>>>reference 19!!!  a total charge densith function is written. Barret uses infinite series of image charges and Green's Function  to find the induced charge. 
+
+	results: if pixel size is e*e, a drifting electron does not make significant contribution until it comes to a distance e. The most striking property is that, the effect of hole trapping is almost unimportant for small pixel electrode. Not only that, the charge collecton depends less on depth of interaction if electrodes are small. this is called small pixel effect. 
+However going into too small pixel is not good, as a matter of fact they've found a pixel size of 0.375 gives the maximum efficiency.
+--------------------------------------------------------------------->>>>>>>>>
+
+4)	source: Luke, P.N., Unipolar Charge Sensing with Coplanar Electrodes-Application to SEmiconductor Detectors, IEEE Trans. Nucl. Sci. Vol42, No 4, 95
+	keywords: Frisch grids, 
+
+	Strip detectors discussed with analogy to Frisch grids. 
+	Resistivity 10^11 ohm cm, (that is why ohmic contacts enough) . 
+	photons in this energy range are weakly absorbed, and so randomly interact in the detector volume, which makes hole trapping effect important. worse at higher energies which need thicker detectors. methods to overcome incomplete hole collection: > pulse shape discrimination
+		            > charge loss compensation
+psd -> rejects poor cahrge collection charac. loss in efficiency
+clc -> each event is analyzed and and a correction is applied. drawback is very sophisticated electronics which increases the size and power consumption. Also sensitive to other properties of material like carrier mobility and electric field distribution. 
+
+	Technique proposed is a similar technique to frisch grid, where this time you totally omit cathode signal and you look at strip anode signal. if Qa is anode signal and Qb is steering electrode signal, then Qa-Qb shows a frisch grid like current, which is nearly zero until charge clouds gets very near to anode, and then it rises steeply. 
+
+	"The signal induced at an electrode due to the movement of a charge carrier can be calculated using w.p. as DQ = Q DVw. The path of the cahrge carrier of course should be calculated from exact potential"
+
+	Weighting potential is obtained by using 'finite element analysis' BUT there are only two sets of electrodes, which is bad for imaging!!!!
+
+	To achieve effective unipolar charge sensing over a large fraction of the detector volume, the strip pitch should be small compared to the thickness of the detector. To prevent sharing, the the steering electrode and the anode should be at different voltages. Strip pitch should be small so that the voltage difference between electrodes is small, so that the electric field distribution is nearly uniform throughout the detector. !!!!!!!!!
+
+	Results: El. Amp max:10 -> hole Amp. Max 0.7 (planar) thus it is effectively a single polarity collection device.  The difference clearly seen in the spectral response of Cs137.  There is an additional Compton Background (Q??)
+Better resolution obtained with higher bias.  !! '"The electronic noise is dominated by leakage currents, and this can be reduced significantly by improving device processing techniques. "!!
+
+	Though improvements are spectacular, it is still worse than statistical considerations by  factor of 10, the factors that can contribute to addittional noise : >electron trapping
+	>spatial non-uniformity in electron trapping
+	>asymmetry in the grid electrode structure  (Q??)		
+	>edge effects	
+
+	Also, the charge measurements of the signals lead to depth of interaction determination. Advantage, since it is insensitive to bias voltage differences and electric field and mobility distribution. But, hole trapping which helps us to get interaction depth, must not be extended to large times to avoid 'polarization effects'.  Polarization effects has not been observed!!meaning all holes are collected. 
+
+	GAIN CONSIDERATIONS: Normally, gains of both electrodes should be matched to get the correct signal, however when we take into account the electron trapping, there might be a better way to get a good resolution.  As the depth of interaction moves closer to grid electrodes, the contribution of non-collecting electrode becomes significant. So to get rid of amplitude variations the gain of the non-collecting electrode can be reduced to an optimum value.  It makes the energy resolution better (Q??)
+----------------------------------------------------------------->>>>>>>>>>>>
+
+5)	source: Luke, P.N. et al Performance of CdZnTe Coplanar-Grid Gamma Ray Detectors, IEEE Trans. Nucl. Sci. Vol43, No3, 96
+	keywords: gain, charge transport non-uniformity, material properties, grain boundaries, twin boundaries
+
+	Spectral performance of CdZnTe detectors discussed, charge transport non-uniformity and gain arrangements discussed. Effects of material properties on spectral response discussed.. 
+
+	Mobility half time product of electrons is app 30 times of holes' and typical values : 3*10^-3 cm^2/V electrons. The grid structure is the same as structure discussed above. The relative gains of the electrodes can be changed. 
+G: amplifier gain of the non collecting grid w.r.t that of collecting grid. ,
+
+	!!!!!As long as the electrons are fully collected (and this happens if the depth of interaction is near the cathode) full amplitude signals are generated. The effect of poor hole transport is eliminated. !!!!!HOWEVER this does not supply the optimum resolution because of electron trapping. The trapping of electrons will cause a position dependent detector response!! See fig. 3. When G<1 , the subtracted signal will show a finite response in the region where there was a null response before. So by playing with G, an optimum resolution can be obtained. !!!!For events occuring at the detector volume, they usually travel a fixed amount because of trapping, and contribute a fixed amount of amplitude most of the times. This does not affect the uniformity of response. HOWEVER, whenever the hole is near to cathode, trapping distance depends on how far it is to cathode and it causes some nonuniformity, and of course when the interaction is near the anode, hole contributes to signal changing response abruptly.!!!! The width of non-uniform region can be reduced by reducing pitch size. !!! The simulated HFWM is 0.3% near to purely statistical consideration of 0.2% 
+
+	Experimental Results: Det 1: 2.4% FWHM for 662keV Det 2: much worse
+The materials always contain grain boundaries or twin planes. Fig. 8 is cool, it shows that grain boundaries greatly affects the porformance!!!  The depths where elctrons are stopped abruptly coincides with the grain boundary. On the other hand, no significant loss was seen for a detector containing many twin layers. This is Det.1. However, bad responsed Det.2 does not contain any visible grain boundaries and twins. That should be attributed to some other possible material property. 
+--------------------------------------------------------------->>>>>>>>>>>>
+
+6)	source: 
+
+	 
+	

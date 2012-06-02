@@ -1,0 +1,23 @@
+;pro col_lc.idl
+
+t_ind=0l
+r_tot=dblarr(32l*128l)
+hm=0.
+
+while t_ind LT n_elements(t) do begin
+
+ t_ch=t(t_ind+32l*128l)-t(t_ind)
+ if t_ch eq 32.0 then begin
+    r_tot=r_tot+r(t_ind:t_ind+32l*128l-1)
+    hm=hm+1
+    t_ind=t_ind+32l*128l
+ endif
+
+ if t_ch ne 32.0 then begin
+    t_ind=t_ind+32l*128l-1
+    while t(t_ind)-t(ind-1) LE 0.01 do t_ind=t_ind-1
+    print,'whoops  '
+    print,t_ind,t(t_ind)
+ endif
+endwhile
+end

@@ -1,0 +1,31 @@
+Questions:
+
+1) 
+  1- "the equation states that the electrode configuration should be such as to yield minimum E_w. If the electrons path, for example, is made to coincide with an equipotential of the grid, the induced current will be zero" BUT, it should be collected somehow???
+------------------------------------------------------------->>>>>>>>.
+2)
+  1- Why Ge is better then Silicon??
+  2- "these spectra have been normalized with respect to the integrated counts in the photopeak of the thirs harmonic" ???
+  3- Warm carrier escape?
+  4- Do CdZnTe detectors have escape peaks, or escape of fluorescence photons?
+  5- When the energetic photoelectron travels and 'creates' electron hole pairs, what is the mechanism?? Compton ??
+  6- What is hopping conduction ??
+  7- "noise considerations ????"
+---------------------------------------------------------------->>>>>>>>.
+3)
+  1- Why CdZnTe better than other high Z materials?
+  2- Why small pixel effect causes a better charge collection?
+----------------------------------------------------------------->>>>>>>>.
+4)
+  1- "polarization effect "?????
+  2- what are the parameters for deciding voltage difference between a, se??
+  3- What is compton continuum backgrounf ??
+  4- "spatial  non-uniformity in electron trapping ,asymmetry in the grid electrode structure " what kind of contribution?
+  5- "also corrects for electron trapping effects " ????
+  6- What is a pulser??
+  7- *** Explain figure 10 ***???
+  8- How reducing the amplitude variations can affect the resolution?
+  9- What is polarization effect???
+------------------------------------------------------------------->>>>>>>>
+5)
+   1- What is twin plane? (or twin layer?)
