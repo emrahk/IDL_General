@@ -1,0 +1,42 @@
+;+
+; XTE_ORIENT.pro - IDL routines for computing attitude information.
+;
+; Taken from Fortran code provided by Tod Strohmayer and Mike Pelling.
+; See also "Spacecraft Attitude Determination and Control", ed. J. R. Wertz
+; (Kluwer 1991). This version uses the IDL (column, row) convention
+; for indexing matrices, which is opposite to Tod's code and Wertz's
+; notation (but it works!).
+
+; To use these programs, make sure that your IDL_PATH environment contains the
+; GSFC astronomy library under /disk2/util/idl_public. Then just type ".RUN
+; xte_orient", TWICE (to solve forward references in the code). The main use
+; of these is to convert quaternions to an attitude matrix (XTEAMAT.PRO), and
+; thereafter convert the Crab's RA and Dec to spacecraft Y and Z (components
+; of a unit vector). The routines can also be used to calculate the sky
+; positions of the clusters +/-1.5 and +/-3.0 degree rocking positions for a
+; given source pointing. See the code or Phil Blanco for details. 
+
+; When reading the routine names, read "_" aloud as "from", eg.
+; RD_SKY = "RA and Dec from sky (Cartesian) coordinates", and
+; SC_ATTSKY = "spacecraft coordinates FROM attitude and sky coodinates".
+; and functions can be chained together to create new ones, eg.
+; RD_SKY(SKY_ATTSC(...)) = "RA and Dec from attitude and spacecraft coords"
+; Examples of use:
+
+; a) To print the RA and Dec look direction at the Y=+1.5 deg position
+; when pointing at J2000 RA=100, Dec=50 on UT 1995 Mar 15 at 12:30 pm.
+
+; Use the attitude in sky coordinates:
+; IDL> Attitude = ATT_RDOBS(19950316, 12, 30.0, [100.0, 50.0]) 
+;  Then: 
+; IDL> PRINT, RD_SKY( (SKYSCAXES_ATT(ATT_PITCHYATT(1.5, Attitude)))(*,0) )
+;  or:
+; IDL> PRINT, RD_SKY(SKY_ATTSC(ATT_PITCHYATT(1.5, Attitude), [1,0,0]))
+
+;Or use the offset spacecraft vector (careful with sign conventions!):
+; IDL>  scvec = [COS(!PI*1.5/180), -SIN(!PI*1.5/180), 0.0]
+; IDL>  PRINT, RD_SKY(SKY_ATTSC(Attitude, scvec)
+
+; b) Calculate the spacecraft coordinates of the Crab (RA=83.6333, Dec=22.0145)
+; IDL> xyz = SC_ATTSKY(Attitude, SKY_RD([83.6333, 22.0145]))
+; -

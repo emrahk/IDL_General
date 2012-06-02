@@ -1,0 +1,76 @@
+Format of the xdr-Fourier-quantity-files:
+------------------------------------------
+
+
+
+
+
+call of the writing and reading procedures:
+
+PRO xdrfu_w1,funame,inpfreq,inpquan, $
+            history=history,high=inphigh, $
+            chatty=chatty 
+PRO xdrfu_w2,funame,inpfreq,inpquan, $
+            history=history,high=inphigh, $
+            chatty=chatty 
+
+PRO xdrfu_r1,funame,freq,quan, $
+             select=select,history=history, $
+             nf=nf,nch=nch,first=first,last=last, $             
+             high=high,chatty=chatty  
+PRO xdrfu_r2,funame,freq,quan, $
+             select=select,history=history, $
+             nf=nf,nch=nch,first=first,last=last, $             
+             high=high,chatty=chatty
+
+
+
+the keyword ``select'' in the reading routines allows to only read one
+dataset, e.g., the Fourier quantity corresponding to one energy band
+(xdrfu_r1) or one energy band combination (xdrfu_r2)
+
+
+   
+
+
+------------------------------------------------------------------------------
+description                 variable               type           example
+------------------------------------------------------------------------------
+
+version                     version                string         'xdrfu1 1.0'
+                                                                  'xdrfu1 1.1'
+                                                                  'xdrfu2 1.0'
+                                                                  'xdrfu2 1.1'
+
+dimension of history        nhist                  long           1L
+history                     history                strarr(nhist)  ''   
+
+dimension of frequencies    nf                     long           0L
+number of energy bands      nch                    long           0L
+
+start-frequency             first                  float          0.
+end-frequency               last                   float          0.
+
+frequency                   freq                   fltarr(nf)
+
+high frequency boundary     high                   fltarr(nf)
+of each frequency bin
+(optional)
+
+xdrfu1: Fourier quantity    quan                   fltarr(nf,nch)
+	(frequency,energy) 
+xdrfu2: Fourier quantity                           fltarr(nf,nch-1,nch)
+	(frequency,soft,hard))
+
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+

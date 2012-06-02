@@ -1,0 +1,86 @@
+pro make_prs,typ,spectra,livetime,idf_hdr,del=del
+;*************************************************************
+; Program packages latest idf events list data arrays
+; into phase-resoved spectral arrays. Variables are:
+;      spectra...............spectral array
+;     livetime...............livetime array
+;          typ...............'EVTs' --> 'HSTs'
+;      idf_hdr...............idf header
+;          del...............time offset (whole,frac)
+;        burst...............burst list mode data
+; Requires the program get_evt.pro
+; First define the common blocks:
+;*************************************************************
+common evt_parms,prms,go,prms_save,burst
+common nai,arr,nai_only
+;*************************************************************
+; Set some variables
+;*************************************************************
+typ = 'HSTs'
+if (ks(nai_only) eq 0)then nai_only = 0
+if (ks(del) eq 0)then del = dblarr(2)
+npha = 256
+period = double(prms(0))
+pdot = double(prms(1))
+ppdot = double(prms(2))
+nbins = prms(3)
+;*************************************************************
+; Alter the science header
+;*************************************************************
+idf_hdr.Na = prms(0)
+idf_hdr.Nb = npha
+idf_hdr.Nc = 1
+;*************************************************************
+; Form latest idf array. First get the events.
+;*************************************************************
+get_evt,spectra,pha,evt_time,j1,det_id,mfc4,agc,psa,bu=burst
+;*************************************************************
+; Add an amount of time offset such that the phase is 
+; referenced to the initial phase. 
+;*************************************************************
+;offset = total(del)/period
+;offset = (offset - long(offset))*double(nbins)/period
+;offset = -1*long(offset + .5)
+spec = lonarr(4,nbins,npha)
+if (nai_only eq 1)then begin
+   a = reform(arr(0,*,*))
+   nai_arr = a(psa,pha) 
+endif else nai_arr = 1
+;*************************************************************
+; Form the spectral array. 
+;*************************************************************
+for i = 0,3 do begin
+ in_det = where(det_id eq i and nai_arr gt 0)
+ if (in_det(0) ne -1)then begin
+    dt = evt_time(in_det)
+    dpha = pha(in_det)
+    for j = 0,npha-1 do begin
+     in = where(dpha eq j,n)
+     if (in(0) ne -1)then begin
+        time = dt(in)
+        temp_time = dblarr(2,n)
+        temp_time(0,*) = long(time)
+        temp_time(1,*) = time - temp_time(0,*)   
+        fold_evt_arr,temp_time,period,nbins,tarr,pd=pdot,$
+                     pp=ppdot,de=del
+;        spec(i,*,j) = shift(tarr(0:nbins-1),offset)
+        spec(i,*,j) = tarr(0:nbns-1)
+     endif
+    endfor
+ endif 
+endfor
+spectra = spec
+;*************************************************************
+; Form the livetime array. For each phase bin, take the total 
+; livetime divided by the number of phase bins.
+;*************************************************************
+time = fltarr(nbins,4)
+for j = 0,3 do time(*,j) = livetime(0,j)/nbins
+livetime = time
+;*************************************************************
+; That's all ffolks
+;*************************************************************
+return
+end
+      
+   

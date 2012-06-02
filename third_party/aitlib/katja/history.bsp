@@ -1,0 +1,101 @@
+Dimension of history (foumerge)=         152
+ Dimension of history (foucalc)=         150
+ Dimension of history (lcseg)=         136
+ Dimension of history (lcsync)=         134
+ Dimension of history (lcmerge)=          21
+ Keyword channelrange (lcmerge)=0-10
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           7
+ Startbins of gaps (lcmerge)=       499711       720895      1761279
+      2195455      3284991      3866623      4808703
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_54a28a0-54a35a8_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549a780-549af20_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549b820-549b9e8_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549bd40-549c5a0_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549cea0-549d20c_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549d310-549dc20_9_0-10.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549e520-549f2a0_9_0-10.lc
+ Dimension of history (lcmerge)=          21
+ Keyword channelrange (lcmerge)=11-16
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           7
+ Startbins of gaps (lcmerge)=       499711       720895      1761279
+      2195455      3284991      3866623      4808703
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_54a28a0-54a35a8_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549a780-549af20_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549b820-549b9e8_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549bd40-549c5a0_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549cea0-549d20c_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549d310-549dc20_9_11-16.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549e520-549f2a0_9_11-16.lc
+ Dimension of history (lcmerge)=          21
+ Keyword channelrange (lcmerge)=17-22
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           7
+ Startbins of gaps (lcmerge)=       499711       720895      1761279
+      2195455      3284991      3866623      4808703
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_54a28a0-54a35a8_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549a780-549af20_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549b820-549b9e8_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549bd40-549c5a0_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549cea0-549d20c_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549d310-549dc20_9_17-22.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549e520-549f2a0_9_17-22.lc
+ Dimension of history (lcmerge)=          21
+ Keyword channelrange (lcmerge)=23-35
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           7
+ Startbins of gaps (lcmerge)=       499711       720895      1761279
+      2195455      3284991      3866623      4808703
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_54a28a0-54a35a8_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549a780-549af20_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549b820-549b9e8_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549bd40-549c5a0_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549cea0-549d20c_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549d310-549dc20_9_23-35.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS3b_549e520-549f2a0_9_23-35.lc
+ Dimension of history (lcmerge)=          23
+ Keyword channelrange (lcmerge)=36-193
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           9
+ Startbins of gaps (lcmerge)=       499711       720895      1266175
+      1760767      2194943      2591743      3283967      3865599      4807679
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_54a28a0-54a35aa_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549a780-549af21_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549b820-549b9e9_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549bd40-549c5a2_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549cea0-549d20e_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549d310-549dc22_9_36-193.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549e520-549f2a2_9_36-193.lc
+ Dimension of history (lcmerge)=          23
+ Keyword channelrange (lcmerge)=194-255
+ Keyword bintime (lcmerge)=      -9.0000000
+ Keyword factor (lcmerge)=           1 Number of gaps (lcmerge)=           9
+ Startbins of gaps (lcmerge)=       499711       720895      1266175
+      1760767      2194943      2591743      3283967      3865599      4807679
+ Names of original lightcurves (lcmerge)=
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_54a28a0-54a35aa_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549a780-549af21_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549b820-549b9e9_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549bd40-549c5a2_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549cea0-549d20e_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549d310-549dc22_9_194-255.lc
+ /scratch/weekly/wilms/P10241/01.all/light/raw/FS37_549e520-549f2a2_9_194-255.lc
+ Keyword obsid (lcsync)=P10241 Keyword username (lcsync)=Katja Pottschmidt
+ Keyword date (lcsync)=Sun Jan 24 15:46:17 1999
+ Maximum dimension of segments (lcseg)=       16384 
+ Dimension of segments (foucalc)=       16384
+ Number of segments (foucalc)=         323
+ Keyword linf has not been set (foucalc) Keyword logf (foucalc)=     0.150000
+ Keyword norebin has not been set (foucalc) Keyword ninstr (foucalc)=       5
+ Keyword deadtime (foucalc)=   1.0000000e-05
+ Keyword nonparalyzable (foucalc)=       0 Keyword obsid (foucalc)=P10241
+ Keyword username (foucalc)=Katja Pottschmidt
+ Keyword date (foucalc)=Sun Jan 24 20:26:38 1999
+ Quantity is not normalized (foucalc)
+ Maximum frequency (foumerge)=       256.00000

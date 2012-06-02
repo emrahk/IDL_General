@@ -1,0 +1,51 @@
+                                                      21-Jan-2002
+
+Procedures in the default version of the IDL Astro Library are meant to work
+for versions V5.2 or later.   This directory contains updates of procedures
+that take advantage of new features in IDL V5.3.    These procedures will *not*
+work in earlier versions of IDL.     Currently, these procedures must be
+considered "beta" versions, since they have not been extremely well tested.
+
+21-Jan-2003: Moved DBHELP, DBINDEX, DBINDEX_BLK, DBFIND_SORT, DBEXT_IND, 
+             FITS_OPEN to main library which now assumes at least V5.2
+
+
+
+19-Sep-2001: Moved CLEANPLOT, FREBIN, GCIRC, QUADTERP, TABINV, YDN2MD to main
+library 
+
+BREAK_PATH() 1. Use STRSPLIT() instead of STR_SEP()
+
+DB_ITEM     1. Use STRSPLIT() instead of STR_SEP()
+
+FDECOMP     1. Use vector call to STRPOS
+
+FIND_WITH_DEF  1. Use STRSPLIT instead of STR_SEP()
+
+FITSDIR     1. Use STRSPLIT() instead of STR_SEP()
+            2. Assume ability to read gzip compressed FITS files
+
+FTAB_EXT   1. Use STRSPLIT() instead of STR_SEP()
+
+
+FTPRINT     1. Use STRSPLIT() instead of STR_SEP()
+
+
+GETTOK()    1. Uses new string processing capabilities to allow vector input
+
+JPLEPHREAD  1. Use vector form of GETTOK()
+
+
+READCOL     1. Call STRSPLIT() to break up each line
+
+READFITS    1. Assume /COMPRESS keyword is always available.
+            2. Use STRJOIN to display image size
+            
+RDFLOAT     1. Use STRSPLIT instead of STR_SEP
+
+
+TBPRINT     1. Use STRSPLIT() instead of STR_SEP()
+
+
+WRITEFITS   1. Added /COMPRESS keyword option to directly write gzip file
+ 

@@ -1,0 +1,216 @@
+F1198; V VC UHV0       ; V   
+F1199; V VC UHV1       ; V   
+F1200; V VC UHV2       ; V   
+F1201; V VC UHV3       ; V   
+F1249; E C0 UVBST      ; V   
+F1250; E C1 UVBST      ; V   
+F1251; E C2 UVBST      ; V   
+F1252; E C3 UVBST      ; V   
+F1257; E C0 IVSSA      ; mA  
+F1258; E C1 IVSSA      ; mA  
+F1259; E C2 IVSSA      ; mA  
+F1260; E C3 IVSSA      ; mA  
+F1549; E C0 UPHI H     ; V   
+F1649; E C1 UPHI H     ; V   
+F1749; E C2 UPHI H     ; V   
+F1849; E C3 UPHI H     ; V   
+F1550; E C0 UPHI L     ; V   
+F1650; E C1 UPHI L     ; V   
+F1750; E C2 UPHI L     ; V   
+F1850; E C3 UPHI L     ; V   
+F1553; E C0 RFGA H     ; V   
+F1653; E C1 RFGA H     ; V   
+F1753; E C2 RFGA H     ; V   
+F1853; E C3 RFGA H     ; V   
+F1554; E C0 RFGA L     ; V   
+F1654; E C1 RFGA L     ; V   
+F1754; E C2 RFGA L     ; V   
+F1854; E C3 RFGA L     ; V   
+F1556; E C0 U-BIAS     ; V   
+F1656; E C1 U-BIAS     ; V   
+F1756; E C2 U-BIAS     ; V   
+F1856; E C3 U-BIAS     ; V   
+F1557; E C0 UCMXVDD    ; V   
+F1657; E C1 UCMXVDD    ; V   
+F1757; E C2 UCMXVDD    ; V   
+F1857; E C3 UCMXVDD    ; V   
+F1558; E C0 UCMXVSS    ; V   
+F1658; E C1 UCMXVSS    ; V   
+F1758; E C2 UCMXVSS    ; V   
+F1858; E C3 UCMXVSS    ; V   
+F1559; E C0 U+15       ; V   
+F1659; E C1 U+15       ; V   
+F1759; E C2 U+15       ; V   
+F1859; E C3 U+15       ; V   
+F1560; E C0 U-15       ; V   
+F1660; E C1 U-15       ; V   
+F1760; E C2 U-15       ; V   
+F1860; E C3 U-15       ; V   
+F1561; E C0 U-35       ; V   
+F1661; E C1 U-35       ; V   
+F1761; E C2 U-35       ; V   
+F1861; E C3 U-35       ; V   
+F1562; E C0 UVDD       ; V   
+F1662; E C1 UVDD       ; V   
+F1762; E C2 UVDD       ; V   
+F1862; E C3 UVDD       ; V   
+F1563; E C0 UVDDA      ; V   
+F1663; E C1 UVDDA      ; V   
+F1763; E C2 UVDDA      ; V   
+F1863; E C3 UVDDA      ; V   
+F1564; E C0 UVSSA      ; V   
+F1664; E C1 UVSSA      ; V   
+F1764; E C2 UVSSA      ; V   
+F1864; E C3 UVSSA      ; V   
+F1566; E C0 IVDDA      ; mA  
+F1666; E C1 IVDDA      ; mA  
+F1766; E C2 IVDDA      ; mA  
+F1866; E C3 IVDDA      ; mA  
+F1567; E C0 I+15       ; mA  
+F1667; E C1 I+15       ; mA  
+F1767; E C2 I+15       ; mA  
+F1867; E C3 I+15       ; mA  
+F1568; E C0 I-15       ; mA  
+F1668; E C1 I-15       ; mA  
+F1768; E C2 I-15       ; mA  
+F1868; E C3 I-15       ; mA  
+F1569; E C0 IVDD D     ; mA  
+F1669; E C1 IVDD D     ; mA  
+F1769; E C2 IVDD D     ; mA  
+F1869; E C3 IVDD D     ; mA  
+F1570; E C0 IIS        ; uA  
+F1670; E C1 IIS        ; uA  
+F1770; E C2 IIS        ; uA  
+F1870; E C3 IIS        ; uA  
+F1571; E C0 IGRA0      ; uA  
+F1671; E C1 IGRA0      ; uA  
+F1771; E C2 IGRA0      ; uA  
+F1871; E C3 IGRA0      ; uA  
+F1572; E C0 IGRA1      ; uA  
+F1672; E C1 IGRA1      ; uA  
+F1772; E C2 IGRA1      ; uA  
+F1872; E C3 IGRA1      ; uA  
+F1573; E C0 IGRA2      ; uA  
+F1673; E C1 IGRA2      ; uA  
+F1773; E C2 IGRA2      ; uA  
+F1873; E C3 IGRA2      ; uA  
+F1576; E C0 TEMPQB1    ; degC
+F1676; E C1 TEMPQB1    ; degC
+F1776; E C2 TEMPQB1    ; degC
+F1876; E C3 TEMPQB1    ; degC
+F1578; E C0 I-35       ; mA  
+F1778; E C2 I-35       ; mA  
+F1878; E C3 I-35       ; mA  
+F1327; A0 ATHRC        ;     
+F1372; A1 ATHRC        ;     
+F1417; A2 ATHRC        ;     
+F1462; A3 ATHRC        ;     
+F1330; A0 DSLINC       ;     
+F1375; A1 DSLINC       ;     
+F1420; A2 DSLINC       ;     
+F1465; A3 DSLINC       ;     
+F1936; A0 CLRFIFOCNT   ;     
+F1937; A1 CLRFIFOCNT   ;     
+F1938; A2 CLRFIFOCNT   ;     
+F1939; A3 CLRFIFOCNT   ;     
+F1053; C CE SECCNT     ; sec 
+F1118; H FW POSSENSORST;     
+F1128; H CE TTMPFPF    ; degC
+F1376; A1 MCM          ;     
+F1625; A1 CMCORR       ;     
+F1626; A1 MIP          ;     
+F1627; A1 MAXMIP       ;     
+F1636; A1 EAMIPSEL     ;     
+F1615; A1 CMLOTH0      ;     
+F1635; A1 SENDMODE     ;     
+F1639; A1 RDMODE       ;     
+F1340; A1 CPU MEDIANCOR;     
+F1070;  C CE TEMPBOX    ;  degC
+F1129;  H CE TTMPS      ;  degC
+F1203;  V VC UHT        ;  V   
+F1186;  V VC TEMP1      ;  degC
+F1187;  V VC TEMP2      ;  degC
+F1253;  E C0 TEMPCCD    ;  degC
+F1254;  E C1 TEMPCCD    ;  degC
+F1255;  E C2 TEMPCCD    ;  degC
+F1256;  E C3 TEMPCCD    ;  degC
+F1574;  E C0 TEMPEA1    ;  degC
+F1674;  E C1 TEMPEA1    ;  degC
+F1774;  E C2 TEMPEA1    ;  degC
+F1874;  E C3 TEMPEA1    ;  degC
+F1001;  D PRIM PW CONSUM;  A   
+F1002;  D P.S. TEMP 1   ;  degC
+F1003;  D P.S. TEMP 2   ;  degC
+F1004;  D +5 V PW SUPPLY;  V   
+F1005;  D DBU POWER SUP.;  V   
+F1006;  D +15V PW SUPPLY;  V   
+F1007;  D -15V PW SUPPLY;  V   
+F1133;  C CE U+5D       ;  V   
+F1134;  C CE U+5A       ;  V   
+F1135;  C CE U-15A      ;  V   
+F1136;  C CE UDGND      ;  V   
+F1137;  C CE CU+5A      ;  V   
+F1138;  C CE CU-15A     ;  V   
+F1188;  V VC IMAIN      ;  mA  
+F1189;  V VC IQ0        ;  mA  
+F1190;  V VC IQ1        ;  mA  
+F1191;  V VC IQ2        ;  mA  
+F1192;  V VC IQ3        ;  mA  
+F1193;  V VC IHT        ;  mA  
+F1203;  V VC UHT        ;  V   
+F1127;  H CE TTMPFPC    ;  degC
+F1128;  H CE TTMPFPF    ;  degC
+F1129;  H CE TTMPS      ;  degC
+F1123;  H CE FWTEMP1    ;  degC
+F1124;  H CE FWTEMP2    ;  degC
+F1271;  V VC IFW        ;  mA  
+F1547;  E C0 UAMOS H    ;  V   
+F1548;  E C0 UAMOS L    ;  V   
+F1551;  E C0 UFLSH H    ;  V   
+F1552;  E C0 UFLSH L    ;  V   
+F1565;  E C0 UDGND      ;  V   
+F1576;  E C0 TEMPQB1    ;  degC
+F1647;  E C1 UAMOS H    ;  V   
+F1648;  E C1 UAMOS L    ;  V   
+F1651;  E C1 UFLSH H    ;  V   
+F1652;  E C1 UFLSH L    ;  V   
+F1665;  E C1 UDGND      ;  V   
+F1676;  E C1 TEMPQB1    ;  degC
+F1678;  E C1 I-35       ;  mA  
+F1747;  E C2 UAMOS H    ;  V   
+F1748;  E C2 UAMOS L    ;  V   
+F1751;  E C2 UFLSH H    ;  V   
+F1752;  E C2 UFLSH L    ;  V   
+F1765;  E C2 UDGND      ;  V   
+F1776;  E C2 TEMPQB1    ;  degC
+F1847;  E C3 UAMOS H    ;  V   
+F1848;  E C3 UAMOS L    ;  V   
+F1851;  E C3 UFLSH H    ;  V   
+F1852;  E C3 UFLSH L    ;  V   
+F1865;  E C3 UDGND      ;  V   
+F1876;  E C3 TEMPQB1    ;  degC
+F1911;  H SUPPLIED POWER;      
+T4004;  TEMP EPCH P RAD ;  DegC
+T4005;  TEMP EPCH CCD   ;  DegC
+P2004;  HLCL EPCCD A CUR;  Amp 
+P2005;  LCL EPICPN A CUR;  Amp 
+P2024;  HLCL EPCCD B CUR;  Amp 
+FD103;  DSLINC AVG      ;      
+EDS001; EVT AVG 2,0-7,0 ;      
+KDS001; EVT AVG 2,0-7,0 ;      
+MD016; COUNTING LE0    ;  CPS 
+MD019; COUNTING HE0    ;  CPS 
+LDS005; R2 OVR UPPD9 AVG;      
+R2SUD9; R2SS OVR UPPD 9 ;  NUM 
+TIME; TIME; days
+
+
+
+
+
+
+
+
+
+
+

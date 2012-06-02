@@ -1,0 +1,58 @@
+Format of the xdr-lightcurve-files:
+------------------------------------
+
+
+
+
+
+
+call of the writing and reading procedures:
+
+PRO xdrlc_w,lcname,time,rate, $
+            history=history, $
+            gaps=gaps,dseg=dseg,chatty=chatty 
+   
+PRO xdrlc_r,lcname,time,rate, $
+            history=history, $
+            gaps=gaps,dseg=dseg,chatty=chatty
+   
+
+
+
+
+
+------------------------------------------------------------------------------
+description                 variable               type            example
+------------------------------------------------------------------------------
+
+version                     version                string          'xdrlc 1.0' 
+
+dimension of history        nhist                  long            1L
+history                     history                strarr(nhist)   ''   
+
+dimension of lightcurve     nt                     long            0L
+number of energy bands      nch                    long            0L
+
+bintime                     bt                     double          0D0
+start-time                  first                  double          0D0
+end-time                    last                   double          0D0
+
+number of gaps              ngaps                  long            0L
+startbins of gaps           gaps                   dblarr(ngaps)      
+keyword                     nogap                  long            0L
+"knowledge about gaps"
+(nogap = 0: no knowledge)
+(nogap = 1: no gaps)
+(nogap = 2: all gaps given in gaps)
+
+dimension of segments       dseg                   long            -1L 
+
+time                        time                   dblarr(nt)
+
+rate(time,energy)           rate                   fltarr(nt,nch)
+
+----------------------------------------------------------------------------
+
+
+
+

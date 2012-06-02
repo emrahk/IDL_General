@@ -1,0 +1,4 @@
+#!/bin/csh
+cd /home/wcoburn/lib/idl
+/home/wcoburn/bin/cvs checkout aitlib
+#

@@ -1,0 +1,58 @@
+-------------------------------------------
+The TRIPP User's Manual may be found at
+http://astro.uni-tuebingen.de/~schuh/tripp/
+-------------------------------------------
+
+---------------------------
+Ultrashort code of practice:
+---------------------------
+
+   tripp_write_zero_log, "zerologfile"
+   tripp_zero,           "zerologfile"
+
+   tripp_write_flat_log, "flatlogfile"
+   tripp_flat,           "flatlogfile"
+
+   tripp_write_image_log,"imagelogfile"
+   tripp_reduction,      "imagelogfile"
+   tripp_show_pos,       "imagelogfile"
+   tripp_define_mask,    "imagelogfile"
+   tripp_extract_flux,   "imagelogfile"
+   tripp_show_raw,       "imagelogfile"
+   tripp_calc_relflux,   "imagelogfile"
+   tripp_show_relflux,   "imagelogfile"
+   tripp_write_relflux,  "imagelogfile"
+
+   tripp_write_final,    "imagelogfile"
+   tripp_show_final,     "imagelogfile"
+
+
+to be continued soon with 
+   tripp_timing,         "imagelogfile" 
+or its modules:
+
+   tripp_calc_scargle,   "imagelogfile"
+   tripp_show_scargle,   "imagelogfile"
+   tripp_calc_epoc,      "imagelogfile"
+   tripp_show_epoc,      "imagelogfile"
+   tripp_calc_sinfit,    "imagelogfile"
+   tripp_show_sinfit,    "imagelogfile"
+
+Also available:
+
+   tripp_monitor,        "imagelogfile"
+   tripp_tv
+   tripp_shade3
+   tripp_simulate
+
+Not available in final form but does exists:
+
+   tripp_write_wetstandard,"imagelogfile"
+   tripp_get_magamp
+
+---------------------------
+Other components are subroutines
+---------------------------
+
+
+

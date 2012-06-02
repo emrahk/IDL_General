@@ -1,0 +1,44 @@
+; IDL Version 3.6.1a (sunos sparc)
+; Journal File for pblanco@mamacass
+; Working directory: /apid14/boresights/idl_prb
+; Date: Wed Jan  3 15:28:25 1996
+ 
+.run xte_orient
+.run xte_orient
+rdobs = [84.0, 22]
+crabrd = [83.633, 22.0145]
+att0 = att_rdobs(19950301, 12, 30.0, rdobs)
+sunrd = [22.801, -7.6229]
+att2 = att_rdobs(19950301, 12, 30.0, rdobs, 2.0)
+quat0 = q_att(att0)
+quat2 = q_att(att2)
+print, att0
+;     0.096917065      0.92210464      0.37460660
+;   -0.0079603090      0.37708452     -0.92614464
+;     -0.99526063     0.086777237     0.043886163
+print, quat0
+;     -0.41107979     -0.55594093      0.37745350      0.61601294
+print, att2
+;     0.096917065      0.92210464      0.37476861
+;    -0.042689554      0.37988330     -0.92444940
+;     -0.99437654     0.073564316     0.076200390
+print, quat2
+;     -0.40042454     -0.54933044      0.38709615      0.62309725
+sunxyz = sc_attsky(att0, sky_rd(sunrd))
+print, sunxyz
+;      0.39304829      0.26042281     -0.88186905
+crabxyz = sc_attsky(att0, sky_rd(crabrd))
+print, crabxyz
+;      0.99998237  -0.00054096858   -0.0059192052
+rdyplus = rd_sky(sky_attsc(att_pitchyatt(1.5,att0), [1,0,0]))
+rdyminus = rd_sky(sky_attsc(att_pitchyatt(-1.5,att0), [1,0,0]))
+rdzplus = rd_sky(sky_attsc(att_yawzatt(1.5,att0), [1,0,0]))
+rdzminus = rd_sky(sky_attsc(att_yawzatt(-1.5,att0), [1,0,0]))
+rdtestobs = rd_sky(sky_attsc(att0, [1,0,0]))
+print, rdtestobs
+;       83.999998       22.000004
+print, rdyplus, rdyminus, rdzplus, rdzminus
+;       82.384877       21.915430
+;       85.616736       22.057399
+;       84.075789       20.501713
+;       83.922587       23.498350

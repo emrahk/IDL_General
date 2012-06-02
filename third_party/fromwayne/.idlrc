@@ -1,0 +1,6 @@
+set_plot,'x'
+!p.psym=10
+!y.style=16
+!x.style=1
+window,retain=2,title='Ia! Ia! Cthulhu Fhtagn!'
+

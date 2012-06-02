@@ -1,0 +1,425 @@
+#!/bin/ksh
+# documentize - build LaTeX document by searching description in 
+#               IDL files.
+# 
+# part of the CAFE project (astronomical fit environment)
+# E. Goehler, IAAT
+# $Log: documentize,v $
+# Revision 1.5  2003/05/09 14:50:10  goehler
+#
+# updated documentation in version 4.1
+#
+# Revision 1.4  2003/04/25 09:02:40  goehler
+# - removed # sections
+# - moved special character replacement into awk plain text handling
+#
+# Revision 1.3  2003/04/25 07:32:04  goehler
+# improved subsection recognition
+#
+# Revision 1.2  2003/04/24 11:50:30  goehler
+# added quoting of "&"
+#
+# Revision 1.1  2003/02/25 08:40:44  goehler
+# initial version of documentation program
+#
+#
+# ###########################################################3
+
+
+
+############################################################
+# SETUP
+############################################################
+
+# define default output file
+OUTFILE="cafe.tex"
+
+
+# check options:
+while [[ $1 = -* ]]; do
+  # -h -> help
+  if [[ $1 = -h ]]; then
+    print "documentize : convert project to LaTeX document"
+    print "Syntax: documentize [-h][-o <output tex file>] [<input files>]"
+    exit 0
+  fi
+  if [[ $1 = -o ]]; then
+    shift
+    OUTFILE=$1
+  fi
+  shift
+done
+
+
+# define (default) input file(s)
+if  [[ $# -eq 0 ]]; then
+    INPUT=cafe_*.pro
+else
+    INPUT=$*
+fi
+
+# define special files:
+SPECIAL_TOPIC="
+cafe_cafe.pro
+cafe_syntax.pro
+cafe_maintenance.pro
+cafe_reference.pro"
+
+
+# read version from cafe input file:
+VERSION=$(awk '/^ *version/{print $3;}' cafe.pro)
+VERSION=${VERSION##\'}
+VERSION=${VERSION%%\'}
+
+
+
+
+############################################################
+# FIND FILES
+############################################################
+
+# store in files:
+# all file names in current directory starting with cafe_
+# preprend special files which should appear before the usual commands. 
+files=$(
+for f in $INPUT; do 
+    
+    # set flag if special file found:
+    special=$(print $SPECIAL_TOPIC| grep $f | wc -l)
+
+    # to not use special files:
+    if [[  $special -eq 0 ]] ;then 
+	print $f
+    fi
+    done | sort )
+
+files="$SPECIAL_TOPIC $files"
+
+
+############################################################
+# WRITE TEX HEADER
+############################################################
+
+cat > $OUTFILE <<EOF
+% $OUTFILE - tex document of IDL CAFE environment
+% Build at: $(date)
+% By: $USER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[titlepage,twopage]{book}
+\title{CAFE\\\\
+The Common Astronomical Fit Environment\\\\
+Version $VERSION\\\\[0.5em]
+User Reference Document}
+\author{Eckart G\\"ohler\\\\IAAT}
+
+\usepackage{a4wide}
+\usepackage{alltt}
+\usepackage{ifthen}
+\usepackage{calc}
+
+
+%%%%%%%%%%%%%%%%%%%%%% PARAMETER LIST DEFINITION %%%%%%%%%%%%%%%%%%%
+
+\newlength{\Paramlength}
+\newcommand{\paramlabel}[1]{%
+  \settowidth{\Paramlength}{\textbf{#1:}}%
+  \ifthenelse{\lengthtest{\Paramlength > \labelwidth}}%
+    {\parbox[b]{\labelwidth}%        Begriff > labelwidth
+         {\makebox[0pt][l]{\textbf{#1:}}\\\\}}%
+    {\textbf{#1:}}%
+ \hfil\relax
+}
+
+\newenvironment{paramlist}%
+{ \begin{list}{}%
+    {\renewcommand{\makelabel}{\paramlabel}%
+     \setlength{\labelwidth}{40pt}%
+     \setlength{\leftmargin}{\labelwidth+\labelsep}%     
+    }%
+}{\end{list}}
+
+
+\begin{document}
+\maketitle
+\chapter{Introduction}
+
+EOF
+#"
+
+
+############################################################
+# EXTRACT SECTIONS/TRANSFORM THEM
+############################################################
+
+#flag for start of auxiliary routines:
+auxroutines=0
+
+for file in  $files; do 
+
+ topic=${file##cafe?(_)}
+ topic=${topic%%.pro}    
+
+ if [[ $topic = "reference" ]]; then 
+    print "\\\\chapter{Reference}"
+    continue
+ fi 
+
+ # add header for auxilliary routines
+ if [[ $file != *_* && $auxroutines -eq 0 ]]; then 
+    print "\\\\chapter{Internal routines}"
+    auxroutines=1
+# description: 
+cat  <<EOF
+ \section{Technical notes}
+ Some of the procedures need additional functions which should be 
+ relegated into additional procedures. These are not kept within the same file but 
+ rather put into additional files. They are distinguished from the
+ command procedures  insofar as they do not contain underscores
+ ("\_"). 
+
+ These procedures either fullfill tasks for several commands --- in
+ this case their name is chosen to have a meaningfull description. 
+
+ If a procedure serves for a single command it starts also with the
+ command name but also does not contain an underscore. 
+EOF
+ fi 
+# end header for auxilliary routines
+
+ # print section header:
+ echo $topic | 
+ awk '
+    # function to capitalize first char:
+    function capitalize(s){
+	return toupper(substr(s,0,1)) tolower(substr(s,2));
+    }
+
+      /_/{ split($0,s,/__?/);
+           printf("\\subsection{\\textit{%s}--%s}\n",
+		capitalize(s[1]), capitalize(s[2]));
+          exit;}
+      {printf("\\section{%s}\n",capitalize($0));}'
+
+ # extract description:
+ awk 'BEGIN{in_description=0;}
+      /^;\+/ {in_description=1;  next; }
+      /^;\-/ {in_description=0; }
+      /^[^;]/ {in_description=0; }
+      /\$Log/   {in_description=0; }
+      in_description { gsub(/^;/,"");  # remove leading ;
+                       print $0;       # print line as is
+                     }
+
+
+
+      ' $file | 
+
+
+# perform item transformation:
+awk '
+
+    # function to capitalize first char:
+    function capitalize(s){
+	return toupper(substr(s,0,1)) tolower(substr(s,2));
+    }
+
+     BEGIN {indention=0;
+            envnesting=0;
+            lastenv[0]=""
+           }
+
+     # any subsection close the environment:   
+    /^ *([A-Z]+ *)+:/ { for (;envnesting > 0;envnesting--) 
+                              printf("\\end{%s}",lastenv[envnesting]);
+
+                             # close example environment:
+			     in_verbatim=0; 
+			     indention=0;
+                           }
+
+     /^ *HISTORY/ {# getline;printf("\\footnotetext{Version: %s}", $3);
+                   exit;} # thats the last one
+     /^ *CATEGORY/ {getline;next;} # skip category
+     /^ *SUBCATEGORY/ {getline;next;} # skip subcategory
+     /^ *NAME/ {getline;next;} # skip name
+     /^ *PURPOSE/ {getline;
+                   printf("\\begin{center}--- %s ---\\end{center}\n",$0);
+                   next;} 
+
+     # examples are verbatim:
+     /^ *EXAMPLE/ {
+		    print "\\subsection*{Example}";
+		    print "\\begin{verbatim}";
+		    envnesting++;
+		    lastenv[envnesting]="verbatim";
+		    indention = 0; # avoid premature end 
+		    in_verbatim=1;
+		    next;
+                  } 
+
+     # syntax is verbatim:
+     /^ *SYNTAX/ {
+		    print "\\subsection*{Syntax}";
+		    print "\\begin{verbatim}";
+		    envnesting++;
+		    lastenv[envnesting]="verbatim";
+		    indention = 0; # avoid premature end 
+		    in_verbatim=1;
+		    next;
+                  } 
+
+     # common subsections:
+     /^ *[A-Z\- ]+ *:/ {#match($0,/^ *([A-Z])([A-Z ]+) *:(.*)/,a);
+		      $1 = capitalize($1);
+		      $2 = capitalize($2);
+		      $3 = capitalize($3);
+		      $4 = capitalize($4);
+                      sub(/^ */,"\\subsection*{");
+		      sub(/:/, "}");
+                      print $0;
+                      next;}
+
+     # paragraphs
+     /^ *([A-Z][a-z\-]+ *)+:/ {
+                      gsub(/^ *[A-Z][a-z\-][a-zA-Z\- ]+ *:/,"\\paragraph{&}");
+			    }
+
+     # item lists:
+     /^ +- +/{ sub(/-/," ");
+               ind=match($0,/[^ ]/);                
+               if(ind > indention) {        # new itemize section
+                  print "\\begin{itemize}";
+	          indention=ind;
+	          envnesting++;
+	          lastenv[envnesting]="itemize";
+               }
+	       print "\\item ";
+             }
+
+     # enumeration lists:
+     /^ +[0-9a-z]+\.) +/{ 
+               ind=index($0,$2);                
+               sub($1,""); # remove it
+               if(ind > indention) {        # new itemize section
+                  print "\\begin{enumerate}";
+	          indention=ind;
+	          envnesting++;
+	          lastenv[envnesting]="enumerate";
+               }
+	       print "\\item ", $0; next;
+             }
+
+     # parameters:
+      /^ +-?[^- ]+ *- +/{ 
+               # extract parameter:
+               match($0,/-?[^- ]+/);
+               param = substr($0,RSTART,RLENGTH);
+               gsub(/_/,"\\_",param);
+               gsub(/</,"$<$",param);
+               gsub(/>/,"$>$",param);
+               gsub(/#/,"\\#",param);
+
+
+	       # remove parameter element (keep spaces)
+	       s = ""
+	       for (i = 0; i < length($1);i++) s = s " ";
+	       $0 = substr($0,0,index($0,$1)-1) s substr($0,index($0,$1)+length($1));
+
+
+	       # remove "-"
+	       sub(/-/," ");
+
+               # look for first nonspace char
+               ind=match($0,/[^ ]/);        
+
+	       # close other environments
+               if (ind+3 < indention && envnesting) {          
+                  printf("\\end{%s}",lastenv[envnesting]);
+                  envnesting--;     
+                  indention=ind; 
+               }
+               if(ind > indention) {        # new itemize section
+                  print "\\begin{paramlist}";
+	          indention=ind;
+	          envnesting++;
+	          lastenv[envnesting]="paramlist";
+               }
+
+	       # print item of first elements:
+	       printf("\\item[%s] ",param);
+             }
+
+
+    # verbatim have no pattern change except leading space removement:
+    in_verbatim {
+		  gsub(/^ */,"");
+		  print $0;
+		  next;
+                 }
+
+     # single line examples are verbatim:
+     /^ *[A-Za-z]*>/{ gsub(/^ */,"");
+             print "\\topsep0em\\partopsep0em\\parsep0em";
+             print "\\begin{verbatim}",$0,"\\end{verbatim}";
+             next;}
+     /^ *->/{gsub(/^ *->/,"");
+             print "\\topsep0em\\partopsep0em\\parsep0em";
+             print "\\begin{alltt}\\hspace{1em}\\(\\Rightarrow\\) ",$0,"\\end{alltt}";
+             next;}
+
+
+     # keep empty lines:
+     /^ *$/ {print "";next;}
+
+     # plain text:
+     { 
+       # close environment when indention finished:
+       ind=match($0,/[^ ]/);
+
+       if (ind < indention && envnesting) {
+          printf("\\end{%s}",lastenv[envnesting]);
+          envnesting--;     
+          indention=ind; 
+       }
+
+       # special char replacement:
+       gsub(/_/,"\\_");
+       gsub(/</,"$<$");
+       gsub(/>/,"$>$");
+       gsub(/#/,"\\#");
+
+       # math symbol replacement:
+       gsub(/ [cC]hi/," $\\chi$");
+       gsub(/ [dD]elta/," $\\Delta$");
+
+       # remove leading spaces:
+       gsub(/^ */,"");
+
+       print $0;
+    }
+    END {if (envnesting > 0) printf("\\end{%s}",lastenv[envnesting]);}'      |
+# perform text transformation:
+sed '
+     s/%/\\\%/g
+     s/\^[0-9a-z]/\$&\$/g
+     s/&/\\&/g
+     t
+     s/\^/\\\^/g' 
+
+done >> $OUTFILE
+
+print "\\\\tableofcontents" >> $OUTFILE
+print "\\end{document}" >> $OUTFILE
+
+
+latex $OUTFILE
+dvips ${OUTFILE%%.tex}
+
+
+
+
+
+
+
+
