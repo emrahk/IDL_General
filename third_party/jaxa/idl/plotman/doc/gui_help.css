@@ -1,0 +1,98 @@
+BODY
+{ padding:0; font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  margin-top	:	30;	
+  margin-left	:	40;		
+  margin-right	:	30;		
+  margin-bottom	:	30;			
+  color		:	#000000;
+  background-color:	#FFFFFF; font-size:12pt }
+
+h1
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  text-align: left;
+  font-size: large;
+  color: #FF6666;
+  margin-left: -20;	
+  margin-bottom:  10;
+  font-weight:bold;
+  mso-style-next:Normal
+  }
+
+h2
+ {font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  COLOR: #CC3399; 
+  font-size: large;
+  text-align:left;
+  margin-left:    -20;
+  font-weight:bold;
+  mso-style-next:Normal;
+  }
+
+h3
+ {font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  COLOR: #6600CC; 
+  margin-left:    -20;
+  font-size: medium;
+  font-weight:bold;
+  mso-style-next:Normal;
+ }
+
+h4
+ {font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  COLOR: #009999; 
+  margin-left:    -20;
+  font-size: medium;
+  font-weight:bold;
+  mso-style-next:Normal;
+ }
+
+h5
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  text-align: left;
+  font-size: medium;
+  color: #993366;
+  margin-left: -20;	
+  margin-bottom:  10;
+  font-weight:normal;
+  mso-style-next:Normal;
+  }
+
+h6
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  text-align: left;
+  font-size: 18pt;
+  color: #993366;
+  margin-left: -20;	
+  margin-bottom:  10;
+  font-weight:normal;
+  mso-style-next:Normal;
+  }
+
+p
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+}
+
+ol
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  margin-bottom:0in;}
+  
+ul
+{ font-family	:	Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+  margin-bottom:0in;}
+	
+td
+    {font-family: Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+     font-size:10pt;
+     color:#000000 }
+
+th
+    {font-family: Myriad Web, Geneva, Arial, Helvetica,sans-serif;
+     font-size:10pt;
+     color:#000000 }
+   
+a:link
+    { color: #0000FF }
+    
+a:hover {color:#ff0000}
+              
+a:active     { color: #0000FF }

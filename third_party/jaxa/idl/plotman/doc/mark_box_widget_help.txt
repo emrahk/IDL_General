@@ -1,0 +1,37 @@
+PLOTMAN MARK BOX,  Kim Tolbert  18-May-2006 (if you can't see all of this on your screen, go to $SSW/gen/idl/plotman/doc/mark_box_widget_help.txt)
+
+
+The PLOTMAN mark_box utility is a widget interface to enable you to graphically select Regions of Interest (ROIs) in an image.
+
+Note the label at the top of the widget showing the current number of boxes defined.  If you can't see the ROIs, they may be outside the range of the current image drawn.  
+
+There are buttons to let you draw ROIs of various shapes on the image as follows:
+
+ DRAW RECTANGLE:  Left-click anywhere in the image and drag to draw a rectangle.
+ 
+ ADD ADJUSTABLE RECTANGLE: A rectangle of the size specified in the text widget (defaults to 1/5 of image size) pops up. Just move the mouse to drag the rectangle to different positions in the image.  Left-click and drag to resize, and right-click when you're done.
+ 
+ ADD FIXED RECTANGLE:  Rectangle(s) with x and y dimension specified in the Size widget are added. If 'Click for Center' is checked, then left-click in the plot to set the center(s) of rectangle(s). Right-click to indicate you've finished.  The rectangles aren't drawn until you right-click. If 'Click for Center' is not checked, then a single rectangle at the center specified in the text widget will be added.  The x and y size default to 1/5 of the image width, and the center defaults to the position of the maximum value in the image.
+ 
+ ADD ADJUSTABLE CIRCLE:  A circle of the radius specified in the text widget (which defaults to 1/5 of the image width) pops up.  Just move the mouse to drag the circle to different positions in the image.  Left-click and drag to resize, and right-click when you're done.
+
+ ADD FIXED CIRCLE:  Circle(s) with radius specified in the Radius widget are added. If 'Click for Center' is checked, then left-click in the plot to set the center(s) of circle(s). Right-click to indicate you've finished.  The circles aren't drawn until you right-click. If 'Click for Center' is not checked, then  a single circle at the center specified in the text widget will be added.  The radius defaults to 1/5 of the image width, and the center defaults to the position of the maximum value in the image.
+
+ ADD POLYGON:  Left-click on the vertices you want to define an irregular shape.  Right-click when you're done, and a final boundary will be added to connect your last vertex with the first one to close the polygon.
+
+ DRAW CONTOUR:  You can draw contours based on an absolute value or percentage. In some cases, lots of contours will be drawn and you may only want the main one, or the first two, etc.  In that case select Keep: First contour or Keep: First 2 contours, etc.
+
+Absolute value contours:  If the '% max in' button is not selected, the contour level is an absolute value in data units.  You can only select one value at a time.
+
+Percentage contours:  When the '% max in' button is selected, you have two choices:
+
+  A.  Full image:  If selected, the maximum data value of the entire image is used.  Contours are drawn at levels equal to the contour level *  max value / 100. 
+
+  B.  ROIs: If selected, then you have several more choices:
+    1.  When you press the 'Draw Contour' button, a selection widget will pop up to allow you to choose which ROI (one or multiple) to use.  This widget won't appear if there's only one ROI defined so far.  The maximum value of the image in all of the ROI(s) selected is used as above, i.e. the contours are drawn at levels equal to the contour level * max value / 100.  NOTE: the maximum value in each ROI is not used - a single maximum is found from all selected ROIs.  If you want the contours to be based on the maximum value in a particular ROI, then select a single ROI, and repeat 'draw contour' for each ROI.
+    2. If 'Delete' is selected, then the ROI(s) used to define the contours will be deleted after the contours are created.
+    3.  If 'Restrict' is selected, the contours will be restricted to be inside the ROI(s).  
+
+ DELETE BOXES:  A popup widget lets you select which boxes to delete.  The numbers in the widget refer to the little numbers that are shown next to each ROI when you draw the boxes.
+
+ INVERSE BOXES:  If selected, then the ROI is considered to be the area outside of the boundary.

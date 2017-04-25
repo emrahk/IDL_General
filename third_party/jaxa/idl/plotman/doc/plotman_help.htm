@@ -1,0 +1,734 @@
+<!-- saved from url=(0022)http://internet.e-mail -->
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Plotman</title>
+<link rel="stylesheet" type="text/css" href="gui_help.css">
+</head>
+
+
+<body>
+
+<div style="background-color: #BED3D3">
+<br>
+<h1 style="text-align: center"><font color="#000000">Plot Manager (PLOTMAN)</font></h1>
+<br></div>
+<p align="center">
+&nbsp;</p>
+<table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse" width="90%" id="AutoNumber2" height="811" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF" bgcolor="#FFFFCC">
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<b><a name="Table of Contents">Table of Contents</a></b></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Overview">Overview</a></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#BED3D3" align="left">
+<a href="#Calling PLOTMAN from the Command Line">Calling PLOTMAN from the 
+Command Line</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#PLOTMAN Defaults">PLOTMAN 
+Defaults</a></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF" align="left">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Printing from PLOTMAN">
+Printing from PLOTMAN</a></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF" align="left">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#File Pull-down Menu">File Pull-down Menu</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF" align="left">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Configure Plot File">
+Configure Plot File</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF">
+<b><a name="Table of Contents" href="plotman_snapshots.htm">Snapshots</a></b></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Create Plot File">Create Plot File</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#PLOTMAN Snapshot">PLOTMAN Snapshot</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Select Printer">Select Printer</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#Image Default Options Widget">Image 
+Default Options Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Configure Print Plot Output">Configure Print Plot Output</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#Image Options Widget">Image Options 
+Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="12" bgcolor="#FFFFCC" style="border-right-style: none; border-right-width: medium">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Print Plot">Print Plot</a></font></td>
+    <td width="5%" height="12" bgcolor="#FFFFFF" style="border-right-style: none; border-right-width: medium">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#XY Plot Options Widget">XY Plot 
+Options Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Export Data">Export Data</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#UT Plot Options Widget">UT Plot 
+Options Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="1" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Stop (for debug purposes only)">Stop (for debug purposes only)</a></font></td>
+    <td width="5%" height="1" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp;&nbsp; <a href="plotman_snapshots.htm#Spectrogram Plot Options Widget">
+Spectrogram Plot Options Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Exit">Exit</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#CCCCFF" align="left">
+&nbsp; <a href="plotman_snapshots.htm#Multi-Panel Options Widget">Multi-Panel 
+Options Widget</a></td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Plot_Control Pull-down Menu">Plot_Control Pull-down Menu</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Image Display Options">Image Display Options</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Image or Spectrogram Profiles">Image or Spectrogram Profiles</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Image Flux">Image Flux</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Image Colors">Image Colors</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#XY Plot Display Options">XY Plot Display Options</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Spectrogram Plot Display Options">Spectrogram Plot Display Options</a></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Spectrogram Integrate Over Y">Spectrogram Integrate Over Y</a></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Zoom">Zoom</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="#Zoom to Previous Zoom Limits">Zoom to Previous Zoom Limits</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Unzoom">Unzoom</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <a href="#Magnify">Magnify</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Refresh">Refresh</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%" height="18" bgcolor="#FFFFCC">
+<font COLOR="#0000ff">
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; <a href="#Window_Control Pull-down Menu">Window_Control Pull-down Menu</a></font></td>
+    <td width="5%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+    <td width="50%" height="18" bgcolor="#FFFFFF">
+&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<hr>
+<h2><a name="Overview">Overview</a></h2>
+<p><a name="Plot Manager">Plot Manager </a>(PLOTMAN) is a generic plot handling 
+package.&nbsp; PLOTMAN provides access to standard IDL plotting options for any 
+data set.&nbsp; Options for zooming, log scale, character size, image 
+representation, and much more are available.&nbsp; Also standard output choices 
+such as printing the plot, creating a plot file in one of several plot formats, 
+or printing the data itself in a text file are available.&nbsp;&nbsp; PLOTMAN 
+features can be incorporated into another widget program, as in the HESSI 
+GUI,&nbsp; OSPEX, and the GOES workbench, or PLOTMAN can be run standalone.&nbsp; In standalone 
+mode, since PLOTMAN is generic, once the data set is defined in a PLOTMAN 
+instance, PLOTMAN offers no control over the data itself, only its 
+representation.</p>
+<p>PLOTMAN handles four types of plot data - xy plots (line plots with anything 
+other than time on the x axis, e.g. spectra), ut plots (x axis is time), image 
+plots, and spectrogram plots.</p>
+<p>Most options are accessed through the pull-down buttons at the top of the 
+PLOTMAN window.&nbsp; In addition, you can right-click in any plot to display 
+the coordinates of a point, or left-click and drag a box to zoom in on any plot. 
+A single left-click with no dragging will restore the original plot limits.</p>
+<p>Use the options under the Plot_Control pull-down menu to alter the appearance 
+of the plot.&nbsp; When more than one panel is displayed in the main widget, clicking on a panel 
+makes that panel the active panel (it will be outlined in red when it is 
+active). Once a panel is selected, then all plot manipulation and save and print 
+options operate on that panel only. If you select 'Current Panel / New PLOTMAN 
+Window' under 'Window_Control', the panel will appear in a new PLOTMAN instance that is entirely independent 
+from the first PLOTMAN widget. </p>
+<p>If PLOTMAN is called with more than one data set, then the plots are stored 
+as separate panels and can be viewed separately or simultaneously.&nbsp; The 'Window_Control' pull-down menu from the top menu bar shows the panels that 
+are stored, and 
+also has some controls to allow you to see multiple panels simultaneously. The 
+'Configure' button allows for customization in displaying multiple panels. In 
+addition, each individual panel has a control menu to close, delete, or maximize 
+that panel, or to display it in a separate window.</p>
+<p><i><a href="#Table of Contents">(Back to Table of Contents)</a></i></p>
+<h2><a name="PLOTMAN Defaults">PLOTMAN Defaults</a></h2>
+<p>PLOTMAN (as of November 2007) allows you to control plot options as follows:</p>
+<ul>
+  <li>Set and remember plot preferences from one IDL session to the next for the 
+  four type of plots (xy, ut, image, and spectrogram) separately.</li>
+  <li>Set specific plot preferences for future plots in the current PLOTMAN 
+  session.</li>
+  <li>Set specific plot options for multiple existing plots easily with precise 
+  control over which options to apply.</li>
+</ul>
+<ol>
+  <li>To set persistent plot preferences,&nbsp; click the 'Set Plot Preferences' 
+  button under File, and select from the menu to set XY, UT, Image, or 
+  Spectrogram plot preferences.
+  <ul type="square">
+    <li>On your first entry, all options are de-sensitized.&nbsp; There is a red 
+    box adjacent to each option. </li>
+    <li>&nbsp;To set a default option, click a red box.&nbsp; It turns green, 
+    the widget becomes sensitive, and you can set the option value.</li>
+    <li>Click 'Accept and Close' to use the green items as defaults for future 
+    plots in this PLOTMAN session.&nbsp; Green items will also be remembered for 
+    future PLOTMAN sessions.&nbsp; Red items are ignored.</li>
+    <li>Enable 'Set for all Plot Types', to set the green options in all four 
+    plot types (xy, ut, image, and spectrogram).</li>
+    <li>Click <a href="plotman_snapshots.htm#Image Default Options Widget">here</a> to see an 
+    example of the default image options with user selections for color table, 
+    limb thickness, character size, and grid spacing.</li>
+    <li>The defaults files are written in&nbsp; your $HOME directory (UNIX), or 
+    the directory returned by get_temp_dir() (Windows) and are named:<br>
+&nbsp;&nbsp;&nbsp; .plotman_xy_pref.geny<br>
+&nbsp;&nbsp;&nbsp; .plotman_ut_pref.geny<br>
+&nbsp;&nbsp;&nbsp; .plotman_image_pref.geny<br>
+&nbsp;&nbsp;&nbsp; .plotman_spec_pref.geny<br>
+&nbsp;</li>
+  </ul>
+  </li>
+  <li>To set plot preferences for future plots in this PLOTMAN session only 
+  (i.e., not in the next PLOTMAN session), 
+  follow the same procedure as above, but unset the 'Write to File' option.<br>
+&nbsp;</li>
+  <li>To change plot options for existing plots, click 'Multi-Panel Options' in 
+  the Window_Control pull-down menu.<ul type="square">
+    <li>Select the panels you want to modify and click 'Change Plot Options'.</li>
+    <li>If the panel that is currently active (red line around plot) is in the 
+    selection, then its current options will be used as the basis for setting 
+    options.&nbsp; If not, the first panel in the selection will be plotted and 
+    used.</li>
+    <li>All the plot options are shown with a red box.&nbsp; Click the red box 
+    to turn it green, and set the option value.</li>
+    <li>All green items will be set in the selected panels.&nbsp; Red items will 
+    be ignored.</li>
+    <li>Only the currently plotted panel will be redrawn automatically.&nbsp; 
+    The other selected panels will use the new options next time you plot them.</li>
+  </ul>
+  </li>
+</ol>
+<p><i><a href="#Table of Contents">(Back to Table of Contents)</a></i></p>
+<p>&nbsp;</p>
+<font SIZE="4"><b>
+<h2><a name="Printing from PLOTMAN">Printing from PLOTMAN</a></h2>
+</b></font>
+<p>The printers available for use by PLOTMAN are listed when you click the File 
+/ 'Select Printer...' button. Printers are defined differently on UNIX 
+and Windows.</p>
+<p>UNIX</p>
+<blockquote>
+<p>The /etc/printcap (DEC, Linux) or /etc/printers.conf (Sun) file is examined 
+to find the list of available printers. If this file doesn't exist, then the 
+program checks these environment variables for printer definitions:</p>
+<p>'PRINTER','PSLASER','PSCOLOR','PSCOLOR2'</p>
+</blockquote>
+<p>Windows</p>
+<blockquote>
+<p>On Windows the program checks these environment variables for printer 
+definitions: </p>
+<p>'PRINTER','PSLASER','PSCOLOR','PSCOLOR2' </p>
+<p>You must first set up the printers as shared and then you must define one or 
+more of the variables listed above.</p>
+<p>To set up printer sharing:</p>
+  <ul>
+    <li>On your Windows desktop, click Start, Settings, Printers.</li>
+    <li>Right-click the printer, enable sharing, and enter a printer share name.</li>
+  </ul>
+<p>You should define at least PSLASER and PSCOLOR in your personal IDL 
+startup file, by adding lines like the following:</p>
+<p><span style="background-color: #C0C0C0">set_logenv, 'PSLASER', '\\lotus\laser-g62'</span></br>
+<span style="background-color: #C0C0C0">set_logenv, 'PSCOLOR', '\\lotus\tek-560'</span></p>
+<p>replacing lotus with your computer name and laser-g62 and tek560 with the 
+share names of the printers. </p>
+</blockquote>
+<p><i><a href="#Table of Contents">(Back to Table of Contents)</a></i></p>
+<p>&nbsp;</p>
+<h2><a name="File Pull-down Menu">File Pull-down Menu</a></h2>
+<h3>Set Plot Preferences</h3>
+<p>This option is described above in <a href="#PLOTMAN Defaults">PLOTMAN 
+defaults</a>.</p>
+<b>
+<h3><a name="Configure Plot File">Configure Plot File</a><br>
+<a name="Create Plot File">Create Plot File</a></h3>
+</b>
+<p>There are options to configure and create a PostScript, TIFF, PNG, or JPEG 
+file of the current plot. In the configuration widgets, most of the parameters 
+are self-explanatory except:</p>
+<ul>
+  <li>PostScript: In the graphic representation of a page in the widget, you can 
+right-click and drag to set the x and y size and offset as well as entering them 
+manually. The aspect ratio of the original plot is not preserved.<br></br></li>
+  <li>PNG, TIFF, JPEG: xsize and ysize are in screen pixels. Order = 0 means 
+display plot right side up, 1 means upside down (I'm not sure why anyone would 
+do this, but there it is).<br><br></li>
+  <li>JPEG: Compression quality is a number of from 0 (&quot;terrible&quot;) to 100 
+(&quot;excellent&quot;) for the JPEG file. The default value is 75 which is &quot;very good&quot; 
+quality. Lower values produce higher compression ratios and smaller files.</li>
+</ul>
+<p>The default location for the output file is the current directory (type pwd 
+at the IDL prompt to see what that is). The default file name is plotman.ps, 
+plotman.tif, etc. The directory and the file name can be changed in the 
+configure widget.</p>
+<b>
+<h3><a name="Select Printer">Select Printer</a></h3>
+</b>
+<p>A widget lets you choose the printer that subsequent print commands will use. 
+Refer to the explanation of how the available <a href="#Printing from PLOTMAN">printers</a> 
+on your computer are determined. </p>
+<b>
+<h3><a name="Configure Print Plot Output">Configure Print Plot Output</a><br>
+<a name="Print Plot">Print Plot</a></h3>
+</b>
+<p>Printing is accomplished by creating a temporary PostScript file in your 
+current directory called plotman_print.ps and then sending it to the printer 
+currently selected. The plotman_print.ps file is then deleted. The configuration 
+window is identical to the configuration window that appears when you click 
+'Configure Plot File' / 'PS', but the configuration options are stored 
+separately so you can set and remember different options for printing as opposed 
+to 
+creating and saving a PS file.</p>
+<b>
+<h3><a name="Export Data">Export Data</a></h3>
+</b>
+<p>Write Text File</p>
+<blockquote>
+<p>This option produces a file containing a text listing of the data that is 
+displayed in the current plot. For images, the x,y coordinates are arranged 
+exactly as in the displayed image (i.e. the top, left numbers in the table 
+correspond to the top, left area of the image plot). This can produce very long 
+text lines, but makes it possible to import easily into a spreadsheet program 
+like Excel. The default file is called output.txt, written in your current 
+directory, but you are given an opportunity to select the output file name and 
+location. </p>
+<p>Note. This option is available only for data types for which a 'LIST' method 
+has been written. This will eventually include all of the HESSI data types, but 
+does not currently. An error message will be displayed if the 'LIST' method is 
+not available.</p>
+</blockquote>
+<p>Write FITS file</p>
+<blockquote>
+<p>This option produces a FITS file containing the data that is displayed in the 
+current plot. Currently this is implemented only for HESSI image data. The 
+default file name is hsi_image_yyyymmdd_hhmmss.fits in the current directory, 
+but you are given an opportunity to select the output file name and location. 
+This fits file contains the image data itself, and all of the control parameters 
+that were used to reconstruct it. You can read the image back into the hessi GUI 
+by selecting the File Input option in the image widget. Or you can read it at the command line using the hsi_image_fitsread routine (check the header of the routine for an 
+explanation of how to call it).</p>
+</blockquote>
+<b>
+<h3><a name="Stop (for debug purposes only)">Stop (for debug purposes only)</a></h3>
+</b>
+<p>This button will be removed in future versions. It provides access to 
+internal variables for debugging purposes.</p>
+<b>
+<h3><a name="Exit">Exit</a></h3>
+</b>
+<p>Exit the HESSI GUI.</p>
+<p><i><a href="#Table of Contents">(Back to Table of Contents)</a></i></p>
+<p>&nbsp;</p>
+<b><font SIZE="4">
+<h2><a name="Plot_Control Pull-down Menu">Plot_Control Pull-down Menu</a></h2>
+</font></b>
+<p>The options under the 
+Plot_Control pull-down menu apply to the currently 
+selected plot panel. If multiple plot panels are showing, then the selected 
+panel is the one you most recently clicked in (should be indicated by a red 
+border).</p>
+<p>Some of the options apply only to images or X vs. Y plots, and are 
+insensitive unless that type of plot is selected.</p>
+<b>
+<h3><a name="Image Display Options">Image Display Options</a></h3>
+</b>
+<p>This button brings up the generic image display control widget.&nbsp; Click
+<a href="plotman_snapshots.htm#Image Options Widget">here</a> to see a snapshot of the widget.&nbsp; There are 
+options to change the image representation, for example to a surface or contour, 
+to define contour levels, set character size, and more. Most of it is 
+self-explanatory, except:</p>
+<ul>
+  <li>In the overlay option, the images available for overlaying are listed in the 
+droplist. Only images that you have already displayed in this GUI session will 
+be included in the droplist. The only type of overlay currently available is a 
+contour over an image.<br><br></li>
+  <li>If 'Auto Apply' is selected, then as soon as any option is changed, the plot 
+is redrawn. If it is not selected, click 'Apply' to redraw plot with new 
+options. <br><br></li>
+  <li>Click 'Cancel' to revert to parameters in effect before entering this widget, 
+and exit widget. <br><br></li>
+  <li>Click 'Accept and Close' to keep changed parameters and exit widget.</li>
+</ul>
+<p>Note: This is a 'modal' widget, which means that you can interact only with 
+this widget until you close it (you can't type anything at the command line or 
+click in any other widget).</p>
+<b>
+<h3><a name="Image or Spectrogram Profiles">Image or Spectrogram Profiles</a></h3>
+</b>
+<p>A separate plot window shows the row or column profile of the image. Move the 
+mouse over the image to select the row or column to profile, left-click to 
+toggle between row and column profiles, and right-click to exit the profiling 
+option. On exit, the profile plot window will be closed. </p>
+<p>Currently there is no way to save or print a profile plot (except by screen 
+capture).</p>
+<p>The X and Y coordinates of the cursor on the image and the image value are 
+displayed at the bottom of the profile plot.</p>
+<b>
+<h3><a name="Image Flux">Image Flux</a></h3>
+</b>
+<p>A widget interface pops up to allow you to define regions on the image. Click 
+buttons to select shape to draw, and then:</p>
+<ul>
+  <li>for rectangles, left-click and drag <br><br></li>
+  <li>for circles, left-click and drag, move cursor to move circle, 
+    double-click and drag to change radius, right-click to accept circle <br><br></li>
+  <li>for polygons, left-click vertices, right-click to accept </li>
+</ul>
+<p>When all regions are defined, click Accept and the flux in each region, as 
+well as the total flux will be displayed in the IDL output log window and in the 
+message window in the main GUI window. The flux is defined as the total of the 
+all of the image values included within the region times the area of an 
+individual pixel. Only whole pixels are included. A pixel is included if any part of it 
+is included in the region you specify.</p>
+<b>
+<h3><a name="Image Colors">Image Colors</a></h3>
+</b>
+<p>Select from the standard set of ~40 IDL color tables, as well as two 
+additional HESSI color tables. The HESSI color tables are designed to make 
+clear where the zero levels of the image are, so they are handled differently. 
+With the standard IDL color tables, the range of image values is scaled to the 
+range of colors in the color table, whereas with the HESSI color tables, the 
+range of image values is symmetric around zero (i.e. the range [-max(abs(image)),max(abs(image))] 
+is scaled to the range of colors in the table). </p>
+<p>Stretching the color table forces the full color range to run from the bottom 
+index selected to the top index selected.</p>
+<p>A gamma correction of 1.0 indicates a linear ramp (i.e., no gamma 
+correction). Higher values of Gamma give more contrast. Values less than 1.0 
+yield lower contrast.</p>
+<b>
+<h3><a name="XY Plot Display Options">XY/UT Plot Display Options</a></h3>
+</b>
+<p>This button brings up the generic X vs. Y or UT plot display control widget. Click
+<a href="plotman_snapshots.htm#XY Plot Options Widget">here</a> to see a snapshot of the widget.&nbsp; There are 
+options to set linear/log, histogram style, character size, and more. Most of it 
+is self-explanatory, except:</p>
+<ul>
+  <li>In the overlay option, the plots available for overlaying are listed in the 
+droplist. There are two basic types of X vs. Y plots – ut plots, and xy plots, 
+ie x axis is time or not. Only plots of the same type can be overlaid. Only 
+plots that you have already displayed in this GUI session will be included in 
+the droplist. The only type of overlay currently available is stacked plots. 
+When you stack plots, the top plot is the primary plot. All of the stacked plots 
+are plotted with the same x-axis limits as the primary plot. You can zoom in on 
+the primary plot, and the stacked plots will zoom to the same limits.<br><br></li>
+  <li>If 'Auto Apply' is selected, then as soon as any option is changed, the plot 
+is redrawn. If it is not selected, click 'Apply' to redraw plot with new 
+options. <br><br></li>
+  <li>Click 'Cancel' to revert to parameters in effect before entering this widget, 
+and exit widget. <br><br></li>
+  <li>Click 'Accept and Close' to keep changed parameters and exit widget.</li>
+</ul>
+<p>Note: This is a 'modal' widget, which means that you can only interact with 
+this widget until you close it (you can't type anything at the command line or 
+click in any other widget).</p>
+<h3><a name="Spectrogram Plot Display Options">Spectrogram Plot Display Options</a></h3>
+<p>This button brings up the generic X vs. Y display control widget. Click
+<a href="plotman_snapshots.htm#Spectrogram Plot Options Widget">here</a> to see 
+a snapshot of the widget. </p>
+<h3><a name="Spectrogram Integrate Over Y">Spectrogram Integrate Over Y</a></h3>
+<p>This button allows you plot the time profile of the integrated flux from the 
+spectrogram, either over the full Y range, or over a Y range you select.</p>
+<b>
+<h3><a name="Zoom">Zoom</a></h3>
+</b>
+<p>After clicking zoom button, left-click in plot window and drag to define zoom 
+window. Click Unzoom, or single left-click in plot window (without dragging) to 
+unzoom.</p>
+<p>Note: You can zoom without clicking 'Zoom' button simply by holding left 
+button down and dragging to draw zoom box. </p>
+<b>
+<h3><a name="Zoom to Previous Zoom Limits">Zoom to Previous Zoom Limits</a></h3>
+</b>
+<p>For each type of plot (image, xy, and ut), when you zoom in, the zoom limits 
+are saved in common. Pressing this button restores the previously zoomed limits 
+for the current type of plot.</p>
+<b>
+<h3><a name="Unzoom">Unzoom</a></h3>
+</b>
+<p>Restores original auto scaled limits for plot. </p>
+<p>Note: You can unzoom without clicking 'Unzoom' button simply by left-clicking 
+once anywhere in plot window (without dragging).</p>
+<b>
+<h3><a name="Magnify">Magnify</a></h3>
+</b>
+<p>Puts a 'magnifying glass' on the plot. A box appears in the plot window. Move 
+the box by moving the mouse. Left-click to magnify the contents of the box. 
+Right-click to quit the magnify option.</p>
+<b>
+<h3><a name="Refresh">Refresh</a></h3>
+</b>
+<p>Redraws the plot with its current plot parameters. Useful, for example, if 
+you have right-clicked to show coordinates at different points, and you want to 
+clear that text from the plot.</p>
+<p><i><a href="#Table of Contents">(Back to Table of Contents)</a></i></p>
+<p>&nbsp;</p>
+<font SIZE="4"><b>
+<h2><a name="Window_Control Pull-down Menu">Window_Control Pull-down Menu</a></h2>
+</b></font>
+<p>This pull-down menu lets you manage the panels (plots that you have already 
+drawn) that are available in the GUI. You can restore any single panel by 
+clicking on the description of the panel.</p>
+<p>Click the Multi-Panel Options button for a variety of operations to perform 
+on multiple panels.&nbsp; Snapshot is
+<a href="plotman_snapshots.htm#Multi-Panel Options Widget">here</a>.&nbsp; In 
+the Multi-Panel Options widget you can select multiple panels to display 
+simultaneously (in multiple smaller panels within the PLOTMAN window), or you 
+can change plot defaults for all selected panels, show selected panels as a 
+movie, make plot&nbsp; files of selected panels, delete selected panels, and 
+more.</p>
+<p>When multiple plots are displayed, the panel surrounded by a red box is the 
+active one.&nbsp; After making a panel active, you can zoom (by left-clicking 
+and dragging) or use the controls under the Plot_Control pull-down menu to 
+modify the display options for that panel.</p>
+<p><i><a href="gui_help.htm">(Back to Table of Contents)</a></i></p>
+<p>&nbsp;</p>
+<h2><a name="Calling PLOTMAN from the Command Line">Calling PLOTMAN from the 
+Command Line</a></h2>
+<p>Some of the data objects you work with have plotman methods.&nbsp; These 
+include the RHESSI image, spectrum, lightcurve, and observing summary objects, 
+as well as the more generic xyplot, utplot, specplot, or map objects.&nbsp; In 
+fact, because the instrument data objects available through show_synop and 
+vso_search/vso_prep such as eit, euvi,&nbsp; and trace 'inherit' the map object, 
+they all have a plotman method.&nbsp; (You can check if your object has a 
+plotman method by typing print,have_method(o,'plotman').&nbsp; A result of 1 
+means you do have a plotman method.)&nbsp; If you are working with one of these 
+object classes, you can call plotman from the command line by typing (if o is 
+your object):</p>
+<p>o -&gt; plotman</p>
+<p>You can include on this call to plotman many of the keywords that apply to 
+the IDL plot command.</p>
+<p>Each time you call o -&gt; plotman, a new plotman instance is created.&nbsp; If 
+you'd prefer to send all of your plots to the same plotman instance, type:</p>
+<p>o1 -&gt; plotman, plotman_obj=pobj&nbsp;&nbsp; ; on the first call the plotman 
+object (pobj) will be created and returned to you<br>
+o2 -&gt; plotman, plotman_obj=pobj&nbsp;&nbsp; ; on subsequent calls, the existing 
+plotman object (pobj) will be used again<br>
+o3 -&gt; plotman, plotman_obj=pobj</p>
+<p>Each new plot will be saved as a separate panel.&nbsp; The panels are 
+accessible under the Window_Control button.</p>
+<p>If you have a simple data array (image, spectrum, time profile, etc.) rather 
+than an object with a plotman method, the best way to use plotman is to insert 
+the data 
+into one of these generic plot objects: xyplot , utplot, specplot, or map, and 
+then use that object as input to PLOTMAN.&nbsp; These object classes are in the 
+gen part of $SSW - please see the header documentation in the .pro files for 
+more information about how to call them.&nbsp; These object classes are 
+integrated well with PLOTMAN&nbsp; - you can set a variety of parameters 
+describing your data into 
+the generic plot object, and PLOTMAN will recognize them.&nbsp; (You can also put 
+the data arrays directly into PLOTMAN without using the intermediate object, but 
+there is less flexibility, so that is not discussed here.)<br>
+<br>
+Here's a really basic example of creating an xyplot object from simple arrays:<br>
+<br>
+x = findgen(100) &amp; y = sin(x) ; create some data arrays<br>
+xy = obj_new('xyplot',x,y) ; create the xyplot object<br>
+p=plotman(input=xy,plot_type='xyplot') ; create a new instance of plotman
+and show the plot<br>
+<br>
+If we want to add another panel to that same plotman instance, and maybe set a 
+little more information in the xy plot object, as well as not plot as a 
+histogram for instance:<br>
+<br>
+x = findgen(100)+1 &amp; y = [[sin(x)],[cos(x)/alog(x)]] ; now y has two 'channels'<br>
+xy2 = obj_new('xyplot',x,y)<br>
+xy2 -&gt; set, id='Sin and cos plot for test', data_unit='Something',&nbsp;
+dim1_ids=['sin', 'cos/log']&nbsp; ;adds labeling information<br>
+p-&gt;new_panel,input=xy2,plot_type='xyplot','My second plot', psym=0, yrange=[-1,1.5]<br>
+<br>
+Similarly, if you want to add an image to the same plotman instance:<br>
+image = dist(512)<br>
+m =obj_new('map')<br>
+m -&gt; setmap, data=image<br>
+p-&gt;new_panel,input=m,plot_type='image','Third panel'&nbsp; ; Adds image to 
+plotman in panel called 'Third panel'<br>
+<br>
+Then you can use Plot_Control to change options or overplot, and Window_Control 
+to select panels.<br>
+<br>
+&nbsp;</p>
+<hr>
+<p><i><font color="#FF0000">
+Last updated 
+<!--webbot bot="Timestamp" S-Type="REGENERATED" S-Format="%d %B, %Y" startspan -->04 July, 2010<!--webbot bot="Timestamp" i-checksum="21060" endspan --> by 
+<a href="mailto:kim.tolbert@gsfc.nasa.gov?subject=HESSI GUI question/problem/comment">
+Kim Tolbert</a>, 301-286-3965</font> </i>
+</p>
+
+</body>
+
+</html>

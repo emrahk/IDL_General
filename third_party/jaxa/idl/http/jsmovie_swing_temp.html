@@ -1,0 +1,158 @@
+<HTML>
+
+<HEAD>
+<TITLE> Javascript Movie Player </TITLE>
+</HEAD>
+
+<BODY BGCOLOR="White">
+
+<CENTER>
+
+<H1> Javascript Movie Player </H1>
+<P>
+
+<TABLE BORDER="10" CELLPADDING="8">
+<TR>
+<TD align="center"> 
+<img src="/smmdac_data/jun6/frame00.gif" width=512 height=512 NAME="animation">
+</TR>
+</TABLE>
+<P>
+
+<FORM NAME="form">
+ <FONT COLOR="Black">
+ <INPUT TYPE=button VALUE="Start" onClick="start_play();">
+ <INPUT TYPE=button VALUE="Pause" onClick="stop_play();">
+ <INPUT TYPE=button VALUE="Faster" onClick="delay/=inc; show_delay();">
+ <INPUT TYPE=button VALUE="Slower" onClick="delay*=inc; show_delay();">
+ <INPUT TYPE=button VALUE="Step" onClick="oneStep();">
+ <INPUT TYPE=button NAME="direction" VALUE="Reverse" onClick="reverse();">
+ <INPUT TYPE=button VALUE="Swing_Mode" onClick="swing_mode();">
+ </FONT>
+ <BR>
+ Frame: <INPUT TYPE=text VALUE="" NAME="frame" SIZE=30> 
+<!-- &nbsp;Delay (ms): <INPUT TYPE=text VALUE="" NAME="delay" SIZE=6> //-->
+
+</FORM>
+</CENTER>
+
+<P>
+<HR>
+<B>Document</B>: <I><SCRIPT>document.write(document.title);</SCRIPT></I><BR>
+<B>URL</B>: <I><SCRIPT>document.write(document.URL);</SCRIPT></I><BR>
+<B>Last Update</B>: <I><SCRIPT>document.write(document.lastModified);</SCRIPT></I><BR>
+
+</BODY>
+</HTML>
+
+<SCRIPT>
+<!--
+
+// Javascript program to produce fast animations by reading from cache
+// Written: 7 July 1997, Zarro, NASA/GSFC
+
+var imax = 2, inc = 1.5, delay = 250.;  
+var num_loaded_images = 0;
+var frame=-1;
+var timeout_id=null;
+var dir=1, playing=0;
+var run = 0;
+var bname = "Reverse";
+var swingon = 0;
+
+// function to count images as they are loaded into cache
+
+function count_images() 
+{ 
+ if (++num_loaded_images == imax) 
+  animate(); 
+ else {
+  document.animation.src=images[num_loaded_images-1].src;
+  document.form.frame.value="Loading "+num_loaded_images+" of "+imax; 
+ }
+}
+
+temp = new Array(imax);          
+
+temp[0]="/smmdac_data/jun6/frame00.gif"; 
+
+// actual loading is done here
+ 
+images = new Array(imax);
+for (var i = 0 ; i < imax; i++) {
+ images[i]= new Image();
+ images[i].onload=count_images;
+ images[i].src=temp[i];
+}
+
+// function to start movie
+
+function start_play() {
+ if (playing == 0) {
+  if (timeout_id == null && num_loaded_images==imax) animate();
+ }
+} 
+
+// function to stop movie
+
+function stop_play() {
+ if (timeout_id) clearTimeout(timeout_id); 
+  timeout_id=null;
+  playing = 0;
+} 
+
+// function to control swing mode
+function swing_mode() {
+  if (swingon) swingon=0; else swingon=1;
+}
+  
+
+// function to do the animation when all images are loaded
+
+function animate()
+{
+ var j;
+ frame=(frame+dir+imax)%imax;
+ j=frame+1;
+ document.animation.src=images[frame].src;
+ document.form.frame.value="Displaying "+j+" of "+imax;
+ if (swingon && (j == imax || frame == 0)) reverse();
+ timeout_id=setTimeout("animate()",delay);
+ playing=1;
+}
+
+
+// function to control stepping thru each frame
+
+function oneStep()
+{
+ var j;
+ if (timeout_id) clearTimeout(timeout_id); timeout_id=null;
+ frame=(frame+dir+imax)%imax;
+ j=frame+1;
+ document.animation.src=images[frame].src;
+ document.form.frame.value="Displaying "+j+" of "+imax;
+ playing=0;
+}
+
+// function to control direction of animation
+
+function reverse()
+{
+ dir=-dir;
+ if (dir > 0) document.form.direction.value="Reverse"; bname="Reverse";
+ if (dir < 0) document.form.direction.value="Forward"; bname="Forward";
+}
+
+// function to display delay between frames (not implemented yet)
+
+function show_delay()
+{
+// document.form.delay.value=delay;
+}
+
+// -->
+</SCRIPT>
+
+
+

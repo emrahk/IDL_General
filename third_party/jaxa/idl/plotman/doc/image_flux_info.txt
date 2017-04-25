@@ -1,0 +1,15 @@
+Explanation of columns in output listings:
+
+Flux is defined as the total of all of the image values included within the selected
+  region times the area of an individual pixel. Only whole pixels are included. A pixel is
+  included if any part of it is included in the selected region.
+
+Area is the total number of pixels used times the area of each pixel.
+
+Centroid and Standard Deviation are the mean and standard deviation of the moments
+of the distribution (see map_xymoments.pro).
+
+Peak location and value are computed by doing parabolic fits to the 9 pixels surrounding
+  the image peak (see parapeak.pro).
+  When the peak pixel is near the edge of the image, the peak location can not be determined
+  (a "?" will be displayed in the list), and the peak value shown is just the highest image value.

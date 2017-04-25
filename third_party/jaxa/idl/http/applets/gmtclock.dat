@@ -1,0 +1,34 @@
+<SCRIPT LANGUAGE="JavaScript">
+
+
+var timerID = null;
+var timerRunning = false;
+
+function stopclock (){
+    if (timerRunning)
+        clearTimeout(timerID);
+    timerRunning = false;
+}
+
+function startclock () {
+    // Make sure the clock is stopped
+    stopclock();
+    showtime();
+}
+
+function showtime () {
+    var now = new Date();
+    ClockStr = now.toGMTString();
+    document.clock.face.value = ClockStr;
+    // you could replace the above with this
+    // and have a clock on the status bar:
+    // window.status = ClockStr;
+    timerID = setTimeout("showtime()",1000);
+    timerRunning = true;
+}
+
+</SCRIPT>
+
+<!** HTML - HTML for applet insertion **> 
+<body vlink=#0000FF onload="startclock()" onunload="stopclock()">
+<form name='clock' onSubmit='0'><b>GMT: <input type='text' name='face' size=25></b></form>

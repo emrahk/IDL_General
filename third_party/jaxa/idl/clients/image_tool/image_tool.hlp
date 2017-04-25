@@ -1,0 +1,674 @@
+;---------------------------------------------------------------------------
+; Document name: image_tool.hlp
+; Created by:    Liyun Wang, GSFC/ARC, February 14, 1995
+;
+; Last Modified: Mon Sep 29 17:47:51 1997 (lwang@achilles.nascom.nasa.gov)
+;---------------------------------------------------------------------------
+;
+; This is the help file for IMAGE_TOOL. It can be read and
+; displayed by WIDG_HELP, version 2 and up and can be read
+; MK_HELP_STC and displayed by XSHOW_HELP. When WIDG_HELP or
+; MK_HELP_STC is called, the keyword SEP_CHAR should be set
+; to '~'.
+;
+;---------------------------------------------------------------------------
+
+~Overview
+		      SOHO Image Tool
+
+The SOHO Image Tool is  an  IDL  widget  program  originally
+designed   as   a   pointing   tool   for   SOHO   CDS/SUMER
+instruments. Other SOHO instruments can also use  this  tool
+as their pointing tool as long as  they  supply  from  their
+planning tool a predefined pointing structure to  it.  Image
+Tool can be also used to display ground-based and spacecraft
+solar images.
+
+~File
+		      File Button
+
+~~Make Hard Copy
+	              Make Hard Copy		
+
+The displayed image can be saved in PS and GIF formats as  a
+file or be sent directly to the  printer  for  printing  via
+this option. When running under a  UNIX  system,  the  whole
+Image Tool window can be saved in PS or GIF format.
+
+~~Save Image in FITS Format
+                   Save Image in FITS Format
+
+The displayed image can also be saved  in  FITS  format,  as
+long as the image contains coordinate  and  scaling  related
+information. You can use this feature to save  a  zoomed  in
+image in FITS format.
+
+Please note that this option only writes minimum information
+into the FITS header. Information contained in original FITS
+header is not included.
+
+~~Update FITS Header
+                        Update FITS Header
+
+If you have the privilege to change the original FITS  file,
+you  can  use  this  option  to  update  the  FITS   header,
+especially after you obtained corrected position and scaling
+information via limb-fitting.
+
+~~Quit
+                    Quit Image Tool
+
+You have the choice of whether to retain the displayed image
+when you quit Image Tool.
+
+~Tools
+
+Built-in tools in Image  Tool  include  Image  Picker,  Limb
+Fitter, Pointing Tool, Magnifier, Profiler,  Overlayer,  and
+others.
+
+~~Image Picker
+		    Image Picker
+
+Different type of  images  from  different  sources  can  be
+loaded into Image Tool. Depending on  the  set  up  of  your
+system, Image Tool may have  access  to  the  SOHO  Synoptic
+Database, Summary Database,  and  Private  Database.   Image
+files located in elsewhere can  be  loaded  in  as  personal
+data.
+
+This version of Image Tool supports primarily  solar  images
+in FITS format because FITS files usually contain  necessary
+information in the FITS header needed by Image Tool.  Images
+in GIF format are also supported as personal data,  but  the
+user needs to  supply  image  related  information  such  as
+observation  time  and  scaling  factor  (if  not  full-disc
+image).
+
+To select images from one of SOHO databases, click the first
+pull-down menu button in the Image Picker and select one  of
+SOHO databases. You then select an  image  source  from  the
+pull-down menu button labeled  "Source:".  Press  the  "List
+file" button to get  a  list  of  images  from  that  source
+observed in the period indicated by the "Start"  and  "Stop"
+dates. This start or stop date can be changed by editing the
+the content of the appropriate box. You can also turn on the
+"Auto list files"  option  so  that  images  can  be  listed
+automatically each time when you select a  new  source  from
+the same database. (This option is always  turned  off  when
+you change to a new database.)
+
+If you are loading in a FITS file that  has  several  images
+buried in binary tables (such as CDS image files), you  will
+see a pop-up widget that allows you to choose which image in
+the binary table you want to load.  The specified image will
+then be loaded in. Also, a new button in the top button  row
+will appear which shows the number of image currently  being
+displayed, and another image can be  selected  and  load  in
+from this button.
+
+When a new image is loaded in, the current  displayed  image
+will be saved onto the image stack and displayed as an  icon
+on the left side of the image window. Images  saved  in  the
+stack can be  loaded  into  the  main  image  window  via  a
+left-click of mouse button over the image. Up to  12  images
+can be saved on to the image stack.
+
+~~Limb Fitter
+		     Limb Fitter
+
+The Limb Fitter Tool allows one to  interactively  choose  a
+certain number of points around the solar limb  and  uses  a
+non-linear least square fit algorithm to do  a  circular  or
+ecliptical fitting.
+
+The number of points to be  used  for  limb-fitting  can  be
+adjusted by moving the indicated slider bar.  Theoretically,
+the more points you use, the more accurate  the  result  can
+be. By default, this number is set to 10.
+
+Once the number of points to be used is determined, you  can
+start selecting those points by moving  the  cursor  to  the
+desired point (presumely on the limb, of course)  and  click
+the mouse button.  A magnified  window  should  give  you  a
+better precision in choosing  the  limb  point.   The  point
+number,  its  position  you  just  selected  and  number  of
+remaining points needed are shown in the tree  text  widgets
+near the bottom. You have to complete  ALL  required  points
+before the limb fitting process can be proceed. As a  result
+of this fitting process, the coordinates of the  solar  disc
+center (X0, Y0) in arc seconds, semi-diameters of the major-
+and minor-axes of the solar disc in X and Y directions (RX0,
+RY0), also in arc seconds, and  the  image  scaling  factors
+(arc seconds per image pixel) in X and  Y  directions  (SRX,
+SRY) are all given.
+
+Pressing the "Accept" button will take any result  you  have
+obtained and exit from the Limb Fitter.  You  can  quit  the
+Limb Fitter without  taking  any  results  by  pressing  the
+"Cancel" button at any time. The "Reset" button will set all
+parameters to its original status, and any  result  you  get
+will be lost.
+
+
+~~Pointing Tool
+		       Pointing Tool
+
+Pointing Tool is usually used as part of a planning tool  of
+a  SOHO  instrument.  It  allows  the  planner  to  view  or
+determine the pointing of the  instrument  at  the  time  of
+observation based on an image obtained earlier.  When  doing
+so interactively, the planner can drag around a graphic  box
+representing the field of view (FOV) of the instrument to  a
+desired location on the solar disc. Value of the pointing of
+a given area is always the center of the area.
+
+Before the Pointing Tool is used, you should make sure  that
+the currently displayed image is properly oriented  (through
+options under the pull-down menu "Options")  such  that  the
+north solar pole is straight up (positive Y  direction)  and
+the west limb of the solar disc is on your right side (i.e.,
+the positive X direction).
+
+This tool gives the user a choice whether or not  the  solar
+differential rotation should be taken into account when  the
+pointing is done.  If the option "Allow Time Projection"  is
+chosen and the pointing area is not supposed to be  off  the
+limb (as indicated in  the  "ZONE"  widget),  the  resultant
+pointing  values  will  reflect  those   when   the   actual
+observation begins (indicated by  "Starting  Time"  widget).
+If the pointing center is "rotated" off the limb by the time
+the observation begins, the time projection option  will  be
+turned  off  automatically,  and   no   rotation   will   be
+applied. If a pointing area is required to be put off  limb,
+no rotation will be applied to this pointing  area  and  the
+criteria will be tested to make sure it is met.
+
+Before you determine the pointing of  an  area,  you  should
+first select the pointing areas from the list. The  pointing
+values can be directly edited manually in the  widgets  that
+show the current pointing  values.   A  carriage  return  is
+required to take the manual editing into effect.  To  do  it
+interactively,  you  can  press  the  "Go"  button;  A   box
+representing the FOV of the current selected  pointing  area
+should appear in the image. You can then press and drag  the
+right mouse button to move the pointing box around. Once you
+have put the pointing area to the desired place,  press  the
+"Ok" button to accept the result.  Up  to  this  point,  the
+button  "Pointed"  should  be  checked,  meaning  that   the
+pointing   of   the   current   selected   area   has   been
+determined. You can abort the interactive  pointing  process
+by pressing the "Cancel" button. You can undo what you  have
+done  by  pressing  the  "Undo"  button;  the  lasted  saved
+pointing values  will  be  restored.  You  can  restore  all
+pointing values of all areas to  their  original  values  by
+pressing the "Undo All" button. You will  be  reminded  when
+you leave the Pointing Tool if you have  any  pointing  area
+left undetermined. If you don't want to change values  of  a
+pointing area, you can check on the "Pointed" button.
+
+Positions of all pointing  areas  or  all  rasters  for  the
+current selected pointing area against the current displayed
+image  can  be  displayed  against  the  image  through  the
+pull-down menu button "Plot". The current pointing area,  if
+pointed, can be identified through the "Identify" button.
+
+You can quit the Pointing Tool by pressing the "Exit" button
+which will take you back to Image Picker.
+
+~~Image Magnifier
+                            Image Magnifier
+
+The Image Magnifier displays, on the left side of  the  main
+image window, interactively an  enlarged  portion  of  image
+centered at the cursor when you move the cursor around  over
+the image. To quit this tool and back to previous tool,  you
+must press the *right* mouse button.
+
+Please note that this Image Magnifier does not increase  the
+resolution  of  the  displayed  image;  instead,  it  simply
+magnifies what is displayed in the  main  image  window.  In
+other words,  the  resolution  of  the  magnified  image  is
+limited to that of the displayed  image.  To  view  enlarged
+image in  its  original  image  resolutoin,  use  the  Fancy
+Magnifoer.
+
+~~Image Profiler
+                      Image Profiler
+
+The  Image  Profiler  draws  interactively  row  or   column
+profiles,  at  the  mouse  cursor  location,  of  the  image
+displayed in the  main  window.   Pressing  the  left  mouse
+button toggles between row and column profiles.   The  right
+mouse button quits the tool and back to previous tool.
+
+~~Overlayer
+                           Overlayer
+
+Overlayer is a tool  that  is  used  to  overlay  an  image,
+partial or whole, to the base image, with or  without  align
+with the base image in observation time.
+
+Only images saved in image stack (shown on the right side of
+the main image window) can be selected and loaded  into  the
+overlayer. To do so, you move the mouse cursor over an  icon
+of the interested image and click the right mouse button.  A
+box will be plotted around the selected image icon, and  the
+image (referred to as the secondary image)  will  be  loaded
+into the Overlayer.
+
+Usually, you would  just  want  to  overlay  region  of  the
+secondary image to the base image. To select a region, press
+and drag the left mouse button to get  a  desired  size  and
+shape of a box for the region. The box can be  moved  around
+by pressing and dragging the right mouse  button.  Once  the
+region is selected, all region related overlaying  functions
+under  the  pull-down  menu  button  "Overlay"  will  become
+available and ready to be revoked.
+
+The region on the secondary image can be  overlayed  to  the
+base image in different ways.  It  can  be  overlayed  as  a
+contour map. It can also be overlayed transparently (so that
+you can see through both base and seconday images), or as  a
+composite image; in the later case, you will have the choice
+of using two different color tables to represent  both  base
+and  secondary  images  respectively.  You  can  also   take
+addition or average on both images in  the  overlay  region,
+and you can replace overlayed region on the base image  with
+the secondary image.
+
+You  can  turn  on/off  the  option  of  "Align  with   Base
+Image". When this option  is  on,  the  selected  region  in
+seconday  image  will  be  differentially  rotated  to   the
+observation time of the base image (unless the difference of
+the observation times of both base and secondary  images  is
+within 10 minutes)  before  it  is  overlayed  to  the  base
+image. Initially this can take a while, but the differential
+rotation is done only  once  and  won't  repeat  unless  you
+select a new region or the base image is changed.
+
+Since differentially rotating a whole image  takes  lots  of
+time, overlaying the whole secondary image to the base image
+is restricted to when the "Align with Base Image" option  is
+turned off.
+
+~~Fancy Magnifier
+                     Fancy Magnifier
+
+This is another way of  seeing  the  image  closely.  A  new
+widget with nicer interface will give you  more  options  to
+see the image closely. The resolution of the magnified image
+is limited only to that of the original image.
+
+~~Colar Table
+		      Color Table Manipulator
+
+Allows you to load a variety of predefined color tables  and
+manipulate the color table.
+
+
+~~XDOC
+                           X D O C
+
+XDOC is an excellent IDL widget program, written by  Dominic
+Zarro of NASA/GSFC, that is  used  to  browse  IDL  programs
+available to your current IDL session.
+
+~Options
+
+~~Image Manupilation
+                    Image Manupilation
+
+Image  Tool  provides  variety  of  functions  for  one   to
+manipulate the  displayed  image.  Click  the  subtopic  for
+details.
+
+~~~Lock Orientation
+	       Lock/Unlock image Orientation
+
+Make the solar coordinates to be  attached  to  or  detached
+from the image.
+
+Generally, the image manipulation operations such  as  flip,
+reverse, and rotate can be performed to make sure  that  the
+image is oriented such that the solar north pole is straight
+up and the west limb is toward the right side of the  image.
+Once the image orientation is correctly set and locked,  the
+image's  orientation  can  be  locked  so  that  the   solar
+coordinate system will follow any further  operations.   One
+can unlock the image orientation if desired.
+
+Once the image orientation  is  locked,  there  will  be  an
+indicator plotted near the upper-right corner of  the  image
+indicating north and west directions.
+
+~~~Flip N/S
+			 Flip N/S
+
+This option flips the image upside down. Good for turning an
+image, in which the solar north pole is  straight  down,  to
+the proper orientation.
+
+~~~Reverse W/E
+		       Reverse W/E
+
+This option reverse the  image  left  side  right,  or  vice
+versa.  Useful  to  turn  the  west/east  limb  leftward  or
+rightward.
+
+~~~Rotate 90 deg counter-clockwise
+               Rotate 90 degrees counter-clockwise
+
+This  option  rotates   the   image   90   degrees   counter
+clockwise. Available only  when  image  orientation  is  not
+locked.
+
+~~~Rotate 45 deg counter-clockwise
+               Rotate 45 degrees counter-clockwise
+
+This  option  rotates   the   image   45   degrees   counter
+clockwise. Available only  when  image  orientation  is  not
+locked.
+
+
+~~~Rotate 45 deg clockwise
+               Rotate 45 degrees clockwise
+
+This    option    rotates    the    image     45     degrees
+clockwise. Available only  when  image  orientation  is  not
+locked.
+
+
+~~~Rotate 180 degrees
+                    Rotate 180 degrees
+
+This is a combination of the "Flip" and  "Reverse"  options.
+It rotates the image 180 degrees.
+
+~~~Log Scaling
+                       Log Scaling
+
+This option rescale the image by  taking  logarithm  to  the
+image array. You will be asked wether to permanently rescale
+the image logarithmically. If you choose not  to  apply  the
+option permanently, next time when the image is redisplayed,
+the original scaling will be restored.
+
+This option cannot be  applied  to  images  that  have  been
+already scaled logarithmically.
+
+~~~Histogram Equalize
+		       Histogram Equalize
+
+Make the displayed image histogram-equalized.
+
+~~~SigRange
+		       SigRange
+
+Select and display the most significant data  range  in  the
+image.
+
+~~~Smooth
+                       Smooth
+
+This option smooths the base image by taking average over
+neighboring points. 
+
+~~~Show Edge
+                     Show Edge
+
+This option enhances the edge of the displayed image.
+
+~~~Plot Contour
+                      Plot Contour
+
+This  option  makes  a  contour  plot  over  the   displayed
+image. You can change number of contour levels from the "Set
+Contour Level" option under "Options".
+
+~~Set Minimum Value
+                  Set Minimum Value
+
+Set the minimum value of image to be considered when scaling
+the image for display; useful when display images with "bad"
+pixels.
+
+~~Set Maximum Value
+                  Set Maximum Value
+
+Set the maximum value of image to be considered when scaling
+the image for display; useful when display images with "bad"
+pixels.
+
+~~Reset Image Limits
+		   Reset Image Limits
+
+This option resets the limits of the displayed image back to
+its original values.
+
+~~Set System Variable
+                     Set System Variable
+
+This is a  pull  down  menu  to  allow  you  to  change  the
+following IDL system variables which  are  graphic  related:
+!P.Color,  !P.Backgroud,  !P.CharSize,   !P.CharThick,   and
+!P.TickLen.
+
+~~Set Contour Level
+                       Set Contour Level
+
+~~Change Cursor Color
+                   Change Cursor Color
+
+By default, the cursor is plotted with the highest available
+color (usually white), but you can change it  to  use  other
+color through this option.
+
+~~Use Boxed Cursor
+                  Use Boxed (or Cross-hair) Cursor
+
+By default, when you click the left mouse  button  over  the
+displayed image, a cross-hair cursor  is  plotted  over  the
+image. You can choose to plot the cursor in either boxed  or
+cross-hair shape through this option.
+
+When you choose the boxed cursor, you can  change  its  size
+through the "Set Boxed  Cursor  Size"  option  in  units  of
+device pixels, image pixcels, or arc seconds (if  the  solar
+graphic system has been established).
+
+
+~~Remove Image from Stack
+                   Remove Image from Stack
+
+Whenever a new image is loaded in, the previous  image  will
+be saved onto an image stack, in which the saved images  are
+displayed as icons in a narrow window in the  right  of  the
+main image window. Image Tool can currently save  up  to  12
+images in the stack. Once this limit is reached,  the  image
+at the top of the stack will be popped off when a new  image
+is loaded in.
+
+You may want to remove a specific image from  the  stack  to
+free up some space. To do so, you need to select  the  image
+to be removed by clicking the *right* mouse button over  the
+image icon  (this  image  will  be  loaded  into  the  Image
+Overlayer at the same time). You then choose this option  to
+remove the selected image from the image stack.
+
+
+~~Show Image Info
+			 Show Image Info
+
+This button displays some  basic  information  on  size  and
+location of the displayed image.
+
+~~Display FITS Header
+			Display FITS Header
+
+This button displays the header information  extracted  from
+the current image FITS file.
+
+~~Show CSI
+			  Show CSI
+
+This button displays the Coordinate System Information (CSI)
+structure of the displayed image.  This  structure  is  used
+internally  by  Image  Tool  to  establish  necessary  solar
+coordinate system and to conduct conversion among  different
+coordinate systems involved.
+
+
+~Refresh
+		       Refresh Button
+
+Use this button  to  redraw  the  displayed  image.   It  is
+sometimes necessary to do so, especially when the  image  is
+"messed" up by wanted boxes or cursors or contore curves are
+overplotted on the image.
+
+Note that images  resulted  from  overlaying  functions  and
+contour curves are not replotted when the  image  window  is
+refreshed.  When  necessary,  those  functions  have  to  be
+repeated after the image window is refreshed.
+
+
+~Zoom In/Out
+		      Zoom In/Out
+
+The zoom in/out feature alows you to zoom in any part of the
+image for a closer look. This is useful  when  you  need  to
+examine or deal with a small portion in the image.
+
+To select the portion of an image to zoom in,  1)  move  the
+cursor to the corner of desired region; 2)  press  and  drag
+the left mouse button till you  get  a  satisfied  size  and
+shape of  a  box  representing  the  selected  region.  This
+process can be repeated  till  you  are  satisfied.  3)  The
+position of the selected region  (box)  can  be  changed  by
+pressing and dragging the *right* mouse button.
+
+Once the desired region is selected, you can press the "Zoom
+In" button on the left  side  of  the  image;  the  selected
+portion of the image will be displayed.
+
+To Zoom out, simply press the "Zoom Out" button. 
+
+Note that you cannot zoom in the image when you are  already
+looking at a zoomed in image.
+
+~Differential Rotation
+		     Differential Rotation
+
+Image Tool supports several differential rotation functions,
+mainly for  the  purpose  of  predicting  where  a  specific
+feature  on  the  solar  surface  will  move.  Direction  of
+differential rotation can be set either eastward or westward
+by selecting the "West" or "East" button. The time  interval
+over which the rotation  is  done  can  be  changed  in  the
+interval box (a carriage return required), or can be set  to
+the the current observation start time.
+
+Points  on  east  or  west  limb,  or  on  central  meridian
+longitude can be rotated at any time.
+
+You can select a point or a region for rotation. To select a
+point, simply move the cursor to its target point and  click
+the left button; a cross-hair or boxed cursor will appear at
+the point. To select a  region,  press  and  drag  the  left
+button to draw a box representing the region. You  can  move
+the box by pressing and dragging the right button.
+
+Once a point is selected, you can select via  the  pull-down
+menu button "Diff. Rotate"  a  function  to  rotate  1)  the
+selected point; 2) all points that have the  same  longitude
+value; or 3) all points that have the same Solar-X value.
+
+When doing differential rotation to a region, you  have  the
+choice of rotating the region with or without relevent image
+pixels remapped. Remapping the image pixels takes some time,
+depending on how big the selected region is.
+
+Finally, the whole image can be differentially rotated. This
+operation is usually very  time  consuming,  so  before  you
+start it, you will be  asked  whether  you  really  want  to
+proceed.
+
+Please note that  any  differential  rotation  indicator  or
+remapped image pixels are not saved and they will  disappear
+whenever the main image window is refreshed.
+
+~Image Display
+		       Image Display
+
+The loaded-in image is displayed on the right side of the
+Image Tool widget.  Image source or type and date/time at
+which the image was taken are shown on the top of displayed
+image. If the image contains necessary information (usually
+extracted from the header of FITS file) to establish a solar
+coordinate system, the coordinates of the current cursor
+position can be displayed in one of the following coordinate
+systems: device coordinate system, data coordinate system,
+solar disc coordinate system, and heliographic coordinate
+system. For a full-disc solar image, if it does not have
+enough information to establish a solar coordinate system,
+you can use the Limb Fitter to calculate such information. 
+
+Images can be displayed with different color table. You can
+select any color table from the pull-down menu button
+"Select color table" under the main image window. Pressing
+and dragging the left, middle, and right mouse button 
+
+Usually, moving the mouse cursor into the display window
+does not do any thing except that the cursor position is
+reported in the "Cursor Position" widget. Clicking the left
+button will plot the cursor (its shape and size can be set
+through a button under "Options") at the current position
+and erase the previous cursor. You can select a region in
+the image, for zoomming in or for differential rotation, by
+pressing and dragging the left button till the size and
+shape of a box representing the selected region are
+obtained. You can move the region box by pressing and
+dragging the right mouse button.
+
+~Grid
+		       Image Grid
+
+Heliographic grid lines can be plotted  over  the  displayed
+image by selecting the "Grid"  button.   Line  intervals  in
+latitude  and  longitude  can  be  changed  by  editing  the
+contents of "LAT" and "LONG"  area  (a  carriage  return  is
+required for the editing to take effect).
+
+~Set Cursor
+		   Set Cursor Shape/Size
+
+Cursor shape can be set to cross-hair or boxed. The size  of
+a boxed cursor can be further set  through  the  "Set  Boxed
+Cursor Size" button in units of device  pixels,  image  data
+pixcels, or arc seconds.
+
+~Set Image Size
+		       Set Image Size
+
+The relative image size can be set through a pop up widget
+to a value between 0.1 and 1.  This is useful when the
+displayed image is too big such that image annotation is
+squeezed off the display window.
+
+~Coordinates
+		      Cursor Position
+
+When the mouse cursor is in the display window, its position
+is reported in this "Cursor Position" widget in one  of  the
+following coordinate systems: 1) Device  coordinate  system,
+2)  Image  pixel  system,  3)  Solar  disc  system,  and  4)
+Heliographic system. If  the  pointing  information  of  the
+image is not available, the later  2  systems  will  not  be
+available.
+
+~Time Setting
+			Time Setting
+
+The start date/time and image observation date/time  can  be
+set to an arbitrary value or reset to their original value.

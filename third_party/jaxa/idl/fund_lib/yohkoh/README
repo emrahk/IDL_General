@@ -1,0 +1,4 @@
+Routines in this directory are 
+required to allow higher level routines (yodat)
+to compile.  Yohkoh specific routines are migrating 
+from $SSW/yohkoh/xxx/util -> $SSSW/yohkoh/util

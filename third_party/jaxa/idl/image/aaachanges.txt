@@ -1,0 +1,79 @@
+21 Jun 95:	Added keywords TITLE and SUBSCRIPTS to XMOVIE.
+
+31 May 95:	Modified XLOAD to not use colors.tbl file.
+
+20 Mar 95:	Added ORIGIN and SCALE keywords to TVAXIS.
+
+20 Oct 94:	Modified TVAXIS and COLOR_BAR to be more flexible.
+
+ 7 Sep 94:	Added routine XBLINK
+
+ 8 Jun 94:	Further corrected bug so that movie width will be correct even
+		if Motif would otherwise force it to be wider while loading.
+
+20 May 94:	Corrected bug in XMOVIE that caused the first image to be
+		slightly offset from the rest on Motif displays.  Disabled
+		printing of display information for each image.
+
+22 Apr 94:	Modified WDISPLAY to support Microsoft Windows.
+
+28 Dec 93:	Modified XMOVIE to call WDISPLAY and EXPTV to display images as
+		they are being loaded.  Added keywords RESIZE, NOEXACT, SIZE,
+		SMOOTH, RELATIVE.
+
+22 Dec 93:	Added TITLE keyword to WDISPLAY.
+
+30 Nov 93:	Added waits in TVPOINTS between calls to CURSOR to avoid
+		spurious points.
+
+11 Nov 93:	Started keeping this list.  Earlier entries were derived from
+		the file documentation headers.
+
+ 9 Nov 93:	Modified image display routines so that the data scales can be
+		either positive or negative.
+
+29 Oct 93:	Added keyword TWO to XLOAD.
+		Added image value to displayed output of TVPROFILE routine.
+		Fixed small bug in TVOUT.
+
+22 Oct 93:	Added routine BYTSCLI, contributed by Mark Hadfield.  This
+		allows the MIN intensity value to be larger than the MAX
+		intensity value, so that the image is displayed in reversed
+		video.  Modified FORM_INT and BSCALE to call BYTSCLI.
+
+ 3 Sep 93:	Modified so that images displayed with EXPTV and PUT can have
+		data coordinates associated with them.  This involved changes
+		in a number of routines, and a greater dependence on the
+		routines in the SERTS graphics devices library.
+
+		Modified CONTV so that it is no longer necessary for the
+		overlaid contour plot and the original image to match pixel for
+		pixel.
+
+30 Aug 93:	Renamed GET_SUBIMAGE to TVSUBIMAGE.
+
+24 Aug 93:	Changed TVPRINT to be compatible with HP LaserJet PCL printers
+		as well as PostScript printers.
+
+ 6 Jul 93:	Fixed small bug in XMOVIE.
+
+25 Jun 93:	Added routine GET_SUBIMAGE (later called TVSUBIMAGE).
+		Added INIT and FIXED_SIZE keywords to TVBOX routine.
+
+24 Jun 93:	Fixed small bug in PUT.
+		Added call to ON_ERROR in SETIMAGE.
+
+14 Jun 93:	Added support for monochrome (dithered) devices into BSCALE.
+
+ 3 Jun 93:	Changed TVZOOM so that one can optionally zoom into the
+		original array, rather than the displayed image.  Other minor
+		changes.
+
+25 May 93:	Rewrote some routines to avoid a bug with HISTOGRAM in OpenVMS
+		on an Alpha workstation.
+
+20 May 93:	Modified to optionally select positions from a zoomed
+		subportion of the whole image.
+
+12 May 93:	Changed TVVALUE to use widgets when available.  This makes it
+		compatible with IDL for Windows.

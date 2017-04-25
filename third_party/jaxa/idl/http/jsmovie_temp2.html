@@ -1,0 +1,388 @@
+<HTML>
+
+<HEAD>
+
+<TITLE> Javascript Movie Player </TITLE>
+</HEAD>
+
+<SCRIPT language="Javascript">
+<!--
+//
+// DYNAMICALLY CREATED HTML - DO NOT EDIT
+//
+// Javascript program to produce fast animations by reading from cache
+// Difference from jsmovie_temp_range.html: allows user to type frame start and stop.
+// Written: 7 July 1997, Zarro, NASA/GSFC
+// Modified: 27 July 1997, Freeland, LSAL - added nice SWING option
+// Modified: 9 Oct 1998, Zarro, SMA/GSFC - added context window button
+// Modified: 3 Feb 2000, Zarro (SM&A/GSFC) - revamped, fixed many 
+//      Javascript errors, and merged start/stop range display changes.
+// Modified: 3 Jun 2014, Kim Tolbert. Fixed bugs - BODY section needs to
+//      be ahead of JavaScript modules because of the way jsmovie works.
+//      Added Speed text box. Changed PopUp to pop underscore img for compatibility with jsmovie.
+
+// Following variables control movie speed, labels, etc.
+
+var imax = 12, inc = 1.50, delay = 100
+var num_loaded_images = 0
+var frame=-1
+var timeout_id=null
+var dir=1, playing=false, swingon=false
+var url_path = "."
+var context = "frame00.gif"
+var ctitle ="test"
+var url_context=url_path+"/"+context
+var iwidth=null, iheight=null
+var index=1
+var images,url
+var show_range=true
+var fstart=1, fstop=imax
+// -->
+</SCRIPT>
+
+<BODY FONT=3 BGCOLOR=FFFFFF LINK=#0000CC VLINK=#0000CC TEXT=#000000 onLoad="loadCache();"> 
+
+<CENTER>
+
+<H1> Javascript Movie Player </H1>
+<P>
+
+<TABLE BORDER="10" CELLPADDING="8">
+<TR>
+<TD align="center"> 
+<img src = "./frame00.gif" NAME=animation ALT="FRAME" width=512 height=512>
+</TR>
+</TABLE>
+<P>
+
+<FORM NAME="form">
+ <FONT COLOR="Black">
+ <INPUT TYPE=button VALUE="Reload" onClick="location.reload(true);">
+ <INPUT TYPE=button VALUE="Start" onClick="startPlay();">
+ <INPUT TYPE=button VALUE="Stop" onClick="stopPlay();">
+ <INPUT TYPE=button VALUE="Faster" onClick="delay/=inc; compDelay(); show_speed(); startPlay();">
+ <INPUT TYPE=button VALUE="Slower" onClick="delay*=inc; compDelay(); show_speed(); startPlay();">
+ <INPUT TYPE=button VALUE="Step" onClick="oneStep();">
+ &nbsp &nbsp <INPUT TYPE=text VALUE="" NAME="frame" SIZE=22 onFocus="blur();">
+ &nbsp; <INPUT TYPE=text VALUE="" NAME="rate" SIZE=15> 
+ &nbsp <INPUT TYPE=button VALUE="Context" onClick="pop_img(url_context,ctitle, 600,700);">
+
+ <BR>
+ Frame Start: <INPUT TYPE=text VALUE="0" NAME="fstart" SIZE=4 onFocus="if (playing) blur();" >
+ &nbsp Stop:  <INPUT TYPE=text VALUE="0" NAME="fstop" SIZE=4 onFocus="if (playing) blur();">
+ &nbsp Reverse: <INPUT TYPE=checkbox Name="direction"  onClick="setDir(this.checked);">
+ &nbsp Swing: <INPUT TYPE=checkbox onClick="swingon=this.checked;"> 
+</FONT>
+
+
+
+</FORM>
+ 
+</CENTER>
+
+<P>
+<HR>
+<B>Document</B>: <I><SCRIPT>document.write(document.title);</SCRIPT></I><BR>
+<B>URL</B>: <I><SCRIPT>document.write(document.URL);</SCRIPT></I><BR>
+<B>Created</B>: <I><SCRIPT>document.write(document.lastModified);</SCRIPT></I><BR>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+////////////////////////////////////////////////////////////////////////////
+
+function get_window_width(fac,def) {  // Return window width
+ 
+var width
+if (!fac) {var fac=.75}
+if (!def) {var def=512}
+
+if (window.screen) {
+ width=parseInt(fac*parseFloat(window.screen.width))
+} else {
+ width=def
+}
+
+return width
+
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+function getWindowheight(fac,def) {   // Return window height
+ 
+var height
+if (!fac) {var fac=.75}
+if (!def) {var def=512}
+
+if (window.screen) {
+ height=parseInt(fac*parseFloat(window.screen.height))
+} else {
+ height=def
+}
+
+return height
+
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Javascript Pop-up image Window
+// Written: Zarro (SAC/GSFC), October 1998, (dzarro@solar.stanford.edu)
+
+var win
+
+function pop_img(url,title,width,height) {
+
+if (!url) {
+ alert('Image URL not entered')
+ return false
+}
+
+// default to fit within 75% of browser window, or 512x512
+
+if (!width) {width=getWindowWidth(.75,512)}
+if (!height) {height=getWindowheight(.75,512)}
+
+if (!win || win.closed) {
+ win = open("","img","width="+width.toString()+",height="+height.toString()+",scrollbars=yes,resizable=yes")
+}
+
+// dynamically create HTML, adding a CLOSE button
+
+if (win) {
+ var d=win.document
+ d.write('<html><head><title>Image Window</title></head><body bgcolor="white"><center>')
+ if (title) {
+  d.write('<h2>'+title+'</h2>')
+ }
+ d.write('<img src='+url+'>')
+ d.write('<br><br><br>')
+ d.write('<form><b><input type="button" value="CLOSE" onClick="self.close();"></b></form></center>')
+ d.write('</html></body>')
+ d.close()
+ win.focus()
+}
+
+return true     
+}
+
+///////////////////////////////////////////////////////////////////////////
+// load image URL's into cache
+
+function loadImg() { 
+ for (var i=0; i < imax ; i++) {
+  if (iwidth && iheight) {
+   images[i] = new Image(iwidth,iheight)
+  } else {
+   images[i] = new Image()
+  }
+  images[i].onload=countImg
+  images[i].src = urls[i]
+ }
+ return
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// count images as they are loaded into cache
+
+function countImg() {
+ 
+ if (++num_loaded_images == imax) {
+  show_speed()
+  startPlay()
+ } else {
+  document.animation.src=images[num_loaded_images-1].src
+  document.form.frame.value="Loading "+num_loaded_images.toString()+" of "+imax.toString() 
+ }
+
+ return
+}
+
+///////////////////////////////////////////////////////////////////////////
+// compute movie delay
+
+function compDelay() {
+ if (delay < .01) {delay=.01}
+ if (delay > 1000000) {delay = 1000000}
+ return
+}
+
+///////////////////////////////////////////////////////////////////////////
+// create image/url arrays for caching
+
+function createCache() {
+ var defined_img=true
+ if (typeof(images) == 'object') {
+  if (images.length != imax) {defined_img=false}
+ } else {
+  defined_img=false
+ }
+ 
+ if (!defined_img) {
+  images = new Array(imax)          
+  urls= new Array(imax)
+ }
+ return
+}
+///////////////////////////////////////////////////////////////////////////
+function image_abort() //  abort loading images
+{ 
+ imax=num_loaded_images
+ if (!images[num_loaded_images].complete) {imax=imax-1}
+ alert("Aborting");
+ if (imax > -1) {animate()} 
+ return
+}
+
+///////////////////////////////////////////////////////////////////////////
+function checkRange() {
+
+ var j=frame+1
+
+ if (dir > 0) {
+  if (j < fstart) {return fstart}
+  if (j > fstop) {return (swingon ? (fstop-1) : fstart)}
+ }
+
+ if (dir < 0) {
+  if (j < fstart) {return (swingon ? (fstart+1) : fstop)}
+  if (j > fstop) {return fstop}
+ }
+ 
+ return j
+}
+
+///////////////////////////////////////////////////////////////////////////
+function setRange()    // set frame start/stop range
+{
+ 
+ if (!show_range) {return}
+ fstart=parseInt(document.form.fstart.value)
+ fstop=parseInt(document.form.fstop.value)
+ if (fstart <= 0 || fstart > imax) {fstart = 1}
+ if (fstop <= 0  || fstop > imax) {fstop=imax}
+ if (fstop < fstart) { 
+  var temp=fstop
+  fstop=fstart
+  fstart=temp
+ }
+ document.form.fstart.value=fstart.toString()
+ document.form.fstop.value=fstop.toString()
+ return
+}
+
+//////////////////////////////////////////////////////////////////////////
+// set movie direction
+
+function setDir(bool) {
+ if (typeof(bool) == 'boolean' && !swingon) {                    
+  bool ? dir=-1 : dir=1
+ }
+}
+
+///////////////////////////////////////////////////////////////////////////
+// start movie
+
+function startPlay()  
+{
+ if (!playing) {
+  setRange()
+  if (timeout_id == null && num_loaded_images==imax) {animate()}
+ }
+ return
+} 
+
+///////////////////////////////////////////////////////////////////////////
+// stop movie
+
+function stopPlay() 
+{
+ if (timeout_id) {clearTimeout(timeout_id)}
+ timeout_id=null
+ playing = false
+ return
+} 
+
+///////////////////////////////////////////////////////////////////////////
+// check direction
+
+function checkDir() {
+
+ var j=frame+1
+ if (swingon) {
+  if (j <= fstart || j >= fstop) {dir=-dir}
+ } else {
+  document.form.direction.checked ? dir=-1 : dir=1 
+ }        
+ return
+}
+ 
+
+///////////////////////////////////////////////////////////////////////////
+  
+function animate()  // control movie loop
+{
+
+ checkDir()
+ frame=(frame+dir+imax)%imax 
+ index=checkRange()
+ frame=index-1
+
+ if (images[frame].complete) {
+  document.animation.src=images[frame].src
+  document.form.frame.value="Displaying "+index.toString()+" of "+imax.toString()
+  timeout_id=setTimeout("animate()",delay)
+  playing=true
+ }
+ return
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+function show_speed()      // show speed
+{
+  document.form.rate.value=Math.round(1000.0/delay)+" frames/sec";
+ 
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+function oneStep() // step frames
+{
+   
+ stopPlay()
+ setRange()
+
+ checkDir()
+ frame=(frame+dir+imax)%imax 
+ index=checkRange()
+ frame=index-1
+
+ if (images[frame].complete) {
+  document.animation.src=images[frame].src
+  document.form.frame.value="Displaying "+index.toString()+" of "+imax.toString()
+ }
+ return
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// load browser cache
+
+function loadCache() {
+createCache()
+urls[0]=url_path+"/frame00.gif"
+loadImg()
+return
+}
+
+// -->
+</SCRIPT>
+
+
+
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,5 @@
+pro xdene
+
+print, 'finito'
+
+end

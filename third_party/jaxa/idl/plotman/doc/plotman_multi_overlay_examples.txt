@@ -1,0 +1,63 @@
+EXAMPLES OF SEARCH PATTERNS IN PLOTMAN MULTI OVERLAY INTERFACE  03-Feb-2010
+
+ Assume we have a PLOTMAN session with the following panels: 
+ Clean 13:01 3-6keV
+ Clean 13:01 6-12keV
+ Clean 13:01 12-25keV
+ Clean 13:22 3-6keV
+ Clean 13:22 6-12keV
+ Clean 13:22 12-25keV
+ Pixon 13:01 6-12keV
+ Pixon 13:01 12-25keV
+ Sim 1
+ Sim 2
+ Sim 3
+ Recon 1 clean
+ Recon 1 pixon
+ Recon 2 clean
+ Recon 2 pixon
+ Recon 3 clean
+ Recon 3 pixon
+ 
+ 
+ SIMPLE SEARCHES. ASSUME YOU'VE SELECTED THESE BASE PANELS:
+ Pixon 13:01 6-12keV
+ Pixon 13:01 12-25keV
+ 
+	Base pattern = blank, Overlay pattern = clean
+	Finds the first two panels with clean in the name.  Result:
+	 Clean 13:01 3-6keV
+	 Clean 13:01 6-12keV
+	 
+	Base pattern = blank, Overlay pattern = clean*12-25*
+	Finds the first two panels with 'clean' anything '12-25'.  Result:
+	 Clean 13:01 12-25keV
+	 Clean 13:22 12-25keV
+	 
+	Base pattern = pixon, overlay pattern = clean
+	For each base panel name, replace 'pixon' by 'clean' and search. Result: 
+	 Clean 13:01 6-12keV
+	 Clean 13:01 12-25keV
+ 
+
+SEARCHES USING !.  ASSUME YOU'VE SELECTED THESE BASE PANELS:
+ Recon 2 pixon
+ Recon 3 pixon
+ 
+	Base pattern = recon!!, Overlay pattern = sim!!
+	Force the two characters after recon in base panel to match 2 characters after sim in overlays.
+	 e.g. for first base panel, search string is 'sim 2*'. Note: if you didn't use the !! to force
+	 the match and just searched for sim, it would have found 'Sim 1' and 'Sim 2'.  Result:
+	 Sim 2
+	 Sim 3
+	 
+	 Base pattern = recon!!, Overlay pattern = recon!!*clean
+	 Force the two characters after recon in base panel to match 2 characters after recon in 
+	 overlays, followed by anthing followed by clean. e.g. for first base panel, search 
+	 string is 'recon 2*clean*'
+	 Recon 2 clean
+	 Recon 3 clean
+	 
+	 NOTE: You can use more than one set of !s to require more than one part of the basea and
+	   overlay strings to match, but you must have an equal number of ! groups in the base and
+	   overlay patterns.

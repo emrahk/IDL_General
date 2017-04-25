@@ -1,0 +1,29 @@
+                  Help on Graphical Interval Selection Widget
+
+Left-click on the plot to define the start of an interval, right-click to 
+define the end of that interval.
+
+If the 'Contiguous intervals' option is selected, once you've defined an 
+interval, another right-click to the right of that interval will define 
+the end of a new interval whose start is the end of the previous interval.
+
+If the 'Force to data boundaries' option is selected, every interval 
+boundary you define will be forced to line up with the nearest data 
+accumulation boundary.
+
+Left double-click in any interval to bring up a menu of options for 
+editing that interval, or breaking it up into sub-intervals.  
+
+The 'Adjust to data boundaries' button examines all of the currently 
+defined intervals, and adjusts them so that they are aligned with data 
+accumulation boundaries.
+
+
+Notes:
+
+If you left-click twice in succession (without right-clicking in between),
+the first click is ignored, and the start moves to the location of the 
+second left-click.
+
+Right-clicks to the left of where you left-clicked (i.e. the end before
+the start) are ignored.

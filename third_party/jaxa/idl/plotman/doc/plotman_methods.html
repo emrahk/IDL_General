@@ -1,0 +1,443 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>PLOTMAN from the Command Line</title>
+<meta name="Microsoft Theme" content="deepblue 011">
+</head>
+
+<body background="background_deepblue.gif" bgcolor="#1F3A80" text="#FFFFFF" link="#DFD664" vlink="#B8B05B" alink="#FFF8A7">
+
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+
+<h1 align="center"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">&nbsp;<!--mstheme--></font></h1>
+
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+
+<h1 align="center"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">PLOTMAN from the Command Line<!--mstheme--></font></h1>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<p align="center"><b><font size="5">Kim Tolbert,
+<!--webbot bot="Timestamp" S-Type="EDITED" S-Format="%d %b %Y" startspan -->28 Nov 2012<!--webbot bot="Timestamp" endspan i-checksum="15260" --></font></b></p>
+<p align="center">&nbsp;</p>
+<p align="center"><a href="#Creating a plotman object">Creating a plotman object</a></p>
+<p align="center"><a href="#Plotman Functions">Plotman Functions</a></p>
+<p align="center"><a href="#Plotman Procedures">Plotman Procedures</a></p>
+<p align="center"><a href="#Plotman Colors">Plotman Colors</a></p>
+<p align="center"><a href="#Plotman Parameters">Plotman Parameters</a></p>
+<p align="center"><a href="#EXAMPLES">Examples</a></p>
+<p align="center">&nbsp;</p>
+<p align="left"><b>Note: This documentation is not complete. It is a work in progress.</b></p>
+<p>In the following examples, p is the plotman object reference.</p>
+<!--msthemeseparator--><p align="center"><img src="rule_deepblue.gif"></p>
+<!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF"><a name="Creating a plotman object">Creating a plotman object</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<p>p = plotman()</p>
+<p>&nbsp;</p>
+<p>Or when you have an xyplot, utplot, specplot, or map object, just call</p>
+<p>xyplot_obj -&gt; plotman</p>
+<p>To return the plotman object reference (e.g. to send more plots to same 
+plotman instance):</p>
+<p>xyplot_obj -&gt; plotman, plotman_obj=p</p>
+<!--msthemeseparator--><p align="center"><img src="rule_deepblue.gif"></p>
+<!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF"><a name="Plotman Functions">Plotman Functions</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<table border="1" cellpadding="10" cellspacing="4" style="border-collapse: collapse" width="100%" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">PLOTMAN method call<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Returned value<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">z = p-&gt;get(/xyz)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Value of xyz control parameter&nbsp; (any of parameters in 
+    plotman_plot_control__define or in plotman properties (list at bottom of 
+    plotman__define)<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">current_panel_number = p-&gt;get(/current_panel_number)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Current panel number<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">current_panel_desc = p-&gt;get(/current_panel_desc)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Current panel description<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">current_panel_struct = p-&gt;get(/current_panel_struct)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Structure with all of the information for the current panel, 
+    e.g.<p>help,current_panel_struct</p>
+    <blockquote>
+      <p>** Structure &lt;17e07da0&gt;, 6 tags, length=9464, data length=9394, refs=3:<br>
+      W_DRAWBASE LONG 6489<br>
+      W_DRAW LONG 6490<br>
+      WINDOW_ID INT 38<br>
+      PLOT_CONTROL STRUCT -&gt; PLOTMAN_PLOT_CONTROL Array[1]<br>
+      SAVED_DATA STRUCT -&gt; PLOTMAN_SAVED_DATA Array[1]<br>
+      DESCRIPTION STRING 'efz20020212.214810 SOHO EIT 195 12-Feb-2002 
+      21:48:10.580 (14:04:09)'</p>
+    </blockquote>
+    <!--mstheme--></font>
+    </td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">panel = p-&gt;desc2panel(panel_desc)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Pointer to panel structure matching panel description<p>
+    Optional keywords:<br>
+    ; number - if set, then returns number of panel instead of pointer to panel 
+    structure.<br>
+    ; all - if set, and number is set, then returns all panel numbers that match 
+    description passed in.<br>
+    ; (all has no effect if number is not set.)<br>
+    ; latest - if set, returns most recent panel matching description. Otherwise 
+    returns first one found.<br>
+    ; strip_time - if set, remove panel creation time from panel descriptions 
+    before checking<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">desc = p-&gt;get(/all_panel_desc)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">String array containing the panel description for all 
+    panels.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">panel_types = p-&gt;get(/all_panel_plot_type)<br>
+&nbsp;<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">String array containing the plot type for all panels: image, 
+    xyplot, utplot, or specplot<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">panels = p-&gt;get(/panels)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Linkedlist object that contains all the information for all 
+    the panels.&nbsp; Use get_count method to see how many panels are stored, 
+    get_item method to get info for a panel, e.g.<p>print, panels-&gt;get_count()<br>
+    panel2 = panels-&gt;get_item(2)<br>
+    help,*panel2</p>
+    <blockquote>
+      <p>** Structure &lt;17e07650&gt;, 6 tags, length=9464, data length=9394, refs=1:<br>
+      W_DRAWBASE LONG 6479<br>
+      W_DRAW LONG 6480<br>
+      WINDOW_ID INT 36<br>
+      PLOT_CONTROL STRUCT -&gt; PLOTMAN_PLOT_CONTROL Array[1]<br>
+      SAVED_DATA STRUCT -&gt; PLOTMAN_SAVED_DATA Array[1]<br>
+      DESCRIPTION STRING '20120220_110000_s4c1B.fts STEREO_B SECCHI COR1 0 
+      20-Feb-2012 11:00:41.222 (14:03:42)'</p>
+    </blockquote>
+    <!--mstheme--></font>
+    </td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">panel_times = p-&gt;get_panel_times(panel_numbers)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Time intervals for each panel specified.
+    <p>panel_times = p-&gt;get_panel_times([2,3,4])<br>
+    ptim,panel_times</p>
+    <blockquote>
+      <p>20-Feb-2012 11:00:41.222 20-Feb-2012 11:00:42.922<br>
+      20-Feb-2012 11:00:50.223 20-Feb-2012 11:00:51.922<br>
+      12-Feb-2002 21:48:10.580 12-Feb-2002 21:48:23.178</p>
+    </blockquote>
+    <!--mstheme--></font>
+    </td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">axis = p-&gt;getaxis( [/ut, /xaxis, /yaxis)<!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Axis requested.&nbsp; Use one of these keywords: /ut, /xaxis, 
+    /yaxis.&nbsp; This doesn't work for all saved object types (like map?).<!--mstheme--></font></td>
+  </tr>
+</table>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<!--msthemeseparator--><p align="center"><img src="rule_deepblue.gif"></p>
+<!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">&nbsp;<!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF"><a name="Plotman Procedures">Plotman Procedures</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<table border="1" cellpadding="10" cellspacing="4" style="border-collapse: collapse" width="100%" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF">
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">0-&gt;set,xyz=value<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Set plotman parameter xyz to value.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;select<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">If currently selected panel is valid, then sets and shows 
+    the window corresponding to that panel, and restores the plot control for 
+    that panel.&nbsp; If you want to add to a plot or replot it, you must call 
+    select first.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;plot<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Plot currently selected panel.&nbsp; Can pass in any values 
+    stored in plot_control as keywords.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;unselect<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Unset focus and plot options from current panel (basically 
+    call wset,-1 and cleanplot) so that any non-plotman plot a user draws does 
+    not show up in plotman window, and has a default set of plot parameters.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;show_panel, panel_numbers=panel_numbers<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Display panels with numbers panel_numbers in plotman.&nbsp; 
+    Optional keywords:<p>; maximize - display panel panel_number<br>
+    ; p2x2 - display first four panels 2 across, 2 down<br>
+    ; showall - show all panels<br>
+    ; nacross - number of plots to show in x direction<br>
+    ; all_1across - stack plots, so only one plot in x direction<br>
+    ; lineplots_1across - always show lineplots (xy, ut) using full width, i.e. 
+    one plot in x direction<br>
+    ; Depending on how many panels to show, it figures out how big each panel it 
+    is going to show<br>
+    ; should be, resizes the draw widget, and displays it.<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;delete_panel, panel_number=panel_number<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Delete panel pnael_number.&nbsp; Optional keywords:<p>
+    current - if set, delete current panel<br>
+    all - if set, delete all panels<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">p-&gt;reset_panel_pc, struct, panels=panel_mask<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">Modify the plot control structure saved in panels specified 
+    by panel mask (i.e. panel_mask is an array of 0s and 1s, to change fourth 
+    panel, call with panels=[0,0,0,1])<br>
+    struct is a structure containing the items in plot control to change.<br>
+    For example to change the color table to table 5 for panels 0,1,2:<br>
+&nbsp; p-&gt;reset_panel_pc, {colortable: 5}, panels=[1,1,1]<br>
+    Or to change the red,green,blue arrays to prefilled arrays in r,g,b:<br>
+&nbsp; p-&gt;reset_panel_pc,{red: r, green:g, blue: b}, panels=[1,1,1]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="31%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+    p-&gt;create_plot_file<!--mstheme--></font></td>
+    <td width="69%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+    Creates a plot file from the current panel. Keywords:<p>ps - if set, create 
+    PostScript file<br>
+    png - if set, create PNG file<br>
+    tiff - if set, create TIFF file<br>
+    jpeg - if set, create JPEG file<br>
+    filename - output plot file name</p>
+    <p>For PostScript plots:<br>
+    landscape - set to 0 or 1 for portrait or landscape plots<br>
+    xsize,ysize - x and y size of plot<br>
+    xoff,yoff - x and y offset from bottom left corner in portrait (remember, if 
+    landscape, this will be the bottom right corner, i.e. portrait was rotated 
+    counter-clockwise)</p>
+    <p>Examples:</p>
+    <p>To plot PS in portrait mode: <br>
+    p-&gt;create_plot_file,/ps,filename='x.ps',landscape=0,xsize=7.5,ysize=10.,xoff=.6,yoff=.6
+    <br>
+    <br>
+    To plot PS in landscape mode <br>
+    p-&gt;create_plot_file,/ps,filename='x.ps',/landscape,xsize=10.,ysize=7.5,xoff=.6,yoff=10.4
+    <br>
+&nbsp;<!--mstheme--></font></td>
+  </tr>
+</table>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<!--msthemeseparator--><p align="center"><img src="rule_deepblue.gif"></p>
+<!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">&nbsp;<!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">
+<a name="Plotman Colors">Plotman Colors</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<p>Plotman reserves 17 slots at the top end of its stored colortable for 
+discrete colors.&nbsp; For each panel, plotman stores three 256 element byte 
+arrays - rcolors, gcolors, and bcolors.&nbsp; The red, green, blue arrays 
+corresponding to the user's choice of colortable are compressed into the first 
+239 spaces in the rcolors, gcolors, bcolors arrays and the top 17 slots always 
+contain the same discrete colors.&nbsp; The names and indices of those discrete 
+colors can be retrieved as follows:</p>
+<p>c=p-&gt;get(/color_names)<br>
+IDL&gt; help,c,/st<br>
+** Structure PLOTMAN_COLOR_NAMES, 17 tags, length=34, data length=34:<br>
+VIOLET&nbsp; 239<br>
+LIME&nbsp; 240<br>
+BLACK&nbsp; 241<br>
+MAROON&nbsp; 242<br>
+RED&nbsp; 243<br>
+PINK&nbsp; 244<br>
+ORANGE&nbsp; 245<br>
+YELLOW&nbsp; 246<br>
+OLIVE&nbsp; 247<br>
+GREEN&nbsp; 248<br>
+DKGREEN&nbsp; 249<br>
+CYAN&nbsp; 250<br>
+BLUE&nbsp; 251<br>
+DKBLUE&nbsp; 252<br>
+MAGENTA&nbsp; 253<br>
+PURPLE&nbsp; 254<br>
+WHITE&nbsp; 255</p>
+<p>In the GUI, users select the colortable through the Plot Control / Image 
+Display Options widget.&nbsp; To change colors at the command line, users can 
+either set the colortable number, or set the red, green, and/or blue arrays. In 
+either case, the colors will be compressed to the first 239 space in the stored 
+plotman color table.&nbsp; e.g.</p>
+<p>p-&gt;set,colortable=5<br>
+or<br>
+p-&gt;set,red=indgen(256)</p>
+<p>To replot a panel with the new colors, a second select must be called before 
+plotting, i.e.</p>
+<p>p-&gt;select<br>
+p-&gt;set,colortable=6<br>
+p-&gt;select<br>
+p-&gt;plot</p>
+<p>Colors: </p>
+<!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">
+<a name="Plotman Parameters">Plotman Parameters</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<table border="0" cellpadding="10" cellspacing="4" style="border-collapse: collapse" width="100%">
+  <tr>
+    <td width="39%" colspan="2"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">COLORS<!--mstheme--></font></td>
+    <td width="61%" colspan="2"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">red<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">green<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">blue<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">colortable<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="39%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;<!--mstheme--></font></td>
+  </tr>
+</table>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif"><!--mstheme--></font>
+<h2><!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif" color="#FFFFFF">
+<a name="EXAMPLES">EXAMPLES</a><!--mstheme--></font></h2>
+<!--mstheme--><font face="Verdana,Arial,Helvetica,sans-serif">
+<ol>
+  <li>Extract the data object for a panel<p>To retrieve the data object stored 
+  for the second panel in plotman:</p>
+  <p>panels=p-&gt;get(/panels) ; returns a linkelist object with panel 
+  information<br>
+  print,panels-&gt;get_count()&nbsp; ; prints number of panels stored<br>
+p1 = panels-&gt;get_item(1) ; gets second panel stored (0 is first)<br>
+saved_data = (*p1).saved_data<br>
+dobj = *saved_data.data</p>
+  <p>&nbsp;</li>
+  <li>Using a map object that contains multiple maps with plotman and changing 
+  the colors of some of the maps:
+    <p>omap=obj_new('map')<br>
+    for k=0,3 do omap-&gt;setmap,k,make_map(100*randomn(seed)*dist(64),id=string(k))<br>
+    <br>
+    ;first plot all four objects with color table 3<br>
+    loadct,3<br>
+    tvlct,r,g,b,/get<br>
+    for k=0,3 do omap-&gt;plotman,k,plotman=p,red=r,green=g,blue=b<br>
+    <br>
+    ; now get r,g,b arrays for color table 5, and replace the first and second 
+    panels with that color table<br>
+    loadct,5<br>
+    tvlct,r,g,b,/get<br>
+    for k=0,1 do omap-&gt;plotman,k,plotman=p,red=r,green=g,blue=b, nodup=0, 
+    /replace<br>
+    <br>
+    ; now get r,g,b arrays for color table 32 and use reset_panel_pc to change 
+    the saved colors for the third and fourth panels and replot all 4 panels<br>
+    <br>
+    loadct,32<br>
+    tvlct,r,g,b,/get<br>
+    p-&gt;reset_panel_pc, {red:r, green:g, blue:b}, panels=[0,0,1,1]<br>
+    p-&gt;show_panel, /all, nacross=2<br>
+    <br>
+    ; now use reset_panel_pc to change the saved color table for the second 
+    panel 2 to color table 5 and replot all 4 panels<br>
+    p-&gt;reset_panel_pc, {colortable: 5}, panels=[0,1]<br>
+    p-&gt;show_panel, /all, nacross=2<br>
+&nbsp;</p>
+  </li>
+  <li>Create a utplot object with two y arrays and errors and plot in plotman:<p>; This part just sets up a 2,10 time array and arrays for y1 and y2 and 
+    their corresponding error arrays<br>
+    t = anytim('12-sep-2012 10:00') + findgen(12)*10.d<br>
+    t=get_edges(t,/edges_2)<br>
+    y1=findgen(10) &amp; y2=findgen(10)+2.<br>
+    y1_err=fltarr(10) + .5 &amp; y2_err=fltarr(10) + 1.<br>
+    <br>
+    ; create utplot object using plotman <br>
+    <br>
+    ut_obj = obj_new('utplot', t, [[y1],[y2]], [[y1_err],[y2_err]])<br>
+    ut_obj-&gt;set,dim1_ids=['y1 data', 'y2 data'], id='Using utplot object', 
+    data_unit='y units'<br>
+    ut_obj-&gt;plotman,desc='testerr'<br>
+&nbsp;</p>
+  </li>
+</ol>
+
+<!--mstheme--></font>
+
+</body>
+
+</html>

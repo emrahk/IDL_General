@@ -1,0 +1,16 @@
+
+
+
+IDL> map=obj_new('map')                  ;-- create map instance
+
+IDL> map->read,file                      ;-- read file
+
+IDL> map->plot                           ;-- plot map
+
+IDL> dmap=map->drotate(duration,/days)   ;-- differentially rotate 'duration' days
+
+IDL> rmap=map->rotate(angle)             ;-- roll rotate 'angle' degrees
+
+IDL> fmap=map->extract(xrange=xrange,yrange=yrange)  ;-- extract subfield
+
+IDL> smap=map->get(/map)                 ;-- extract map structure

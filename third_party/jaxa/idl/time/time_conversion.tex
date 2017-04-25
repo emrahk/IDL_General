@@ -1,0 +1,313 @@
+\documentstyle[11pt]{article}
+
+\setlength{\oddsidemargin}{0in}		%  1 inch (0 + 1) from left.
+\setlength{\topmargin}{-0.5in}		%  1 inch (1.5 - 0.5) from top.
+\setlength{\textwidth}{6.5in}		%  1 inch (8.5 - 1 - 6.5) from right.
+\setlength{\textheight}{9in}		%  1 inch (11 - 1 - 9) from bottom.
+
+\addtolength{\parskip}{0.5\baselineskip}
+
+%  The environment centerpage centers text vertically on the page.  This is
+%  useful within a titlepage environment.
+
+\newenvironment{centerpage}{\mbox{} \protect\vspace*{\fill}}{
+	\protect\vspace*{\fill} \mbox{} \protect\\ \mbox{}}
+
+%  The environment quotetable combines the quote environment with the tabular
+%  environment for unnumbered tables that appear within the text.  The
+%  environment centertable does the same, except that tables are centered
+%  instead of indented.
+
+\newenvironment{quotetable}[1]{\begin{quote}\begin{tabular}
+	{@{}#1}}{\end{tabular}\end{quote}}
+\newenvironment{centertable}[1]{\begin{center}\begin{tabular}
+	{#1}}{\end{tabular}\end{center}}
+
+\begin{document}		
+\bibliographystyle{plain}		% Define bibliography style.
+
+\begin{titlepage}
+\hrule
+{\noindent\bf CORONAL DIAGNOSTIC SPECTROMETER}\\
+\vspace{-0.7\baselineskip}\\
+{\noindent\Huge\bf SoHO}
+\vspace{2mm}
+\hrule
+\vspace{3mm}
+\centerline{\bf CDS SOFTWARE NOTE No. 14}
+\vspace{3mm}
+\hrule
+\noindent Version 7 \hfill 19 June 1995
+\vspace{2mm}
+\hrule
+
+\begin{centerpage}
+
+\begin{center}
+{\Large\bf CDS Time Conversion Software}\\
+\mbox{}\\
+W. Thompson\\
+Applied Research Corporation\\
+NASA Goddard Space Flight Center\\
+Laboratory for Astronomy and Solar Physics\\
+Code 682.1\\
+Greenbelt, MD 20771, USA\\
+\mbox{}\\
+William.T.Thompson.1@gsfc.nasa.gov\\
+pal::thompson
+\end{center}
+
+\end{centerpage}
+
+\end{titlepage}
+
+\section{Time formats}
+
+There are two kinds of time used within the CDS project:
+
+\subsection{TAI---International Atomic Time}
+
+This is the time used by the SoHO spacecraft, and is defined as the number of
+standard seconds since 0h on 1~January~1958.  In the CDS software, TAI time is
+always expressed as a double precision floating point number.
+
+A distinction needs to be made between spacecraft time and geocentric time.
+The latter includes a correction for the difference in light arrival time
+between the spacecraft and the Earth.  It has been discussed at SoHO SOWG
+meetings that all times should be geocentric except when explicitly labelled as
+spacecraft time.  The correction would be based on the spacecraft ephemeris
+supplied by the FOT.  However, the software to calculate this correction has
+not been written yet.
+
+\subsection{UTC---Coordinated Universal Time}
+
+This is the time standard on which civil time is based.  The main distinction
+between UTC and TAI, at least since 1~January~1972, is that occasionally a
+``leap second'' is inserted into the UTC time to keep it in sync with the
+rotation of the earth.  (Before 1972 the situation was more complicated.)  TAI
+time has no leap seconds.  Therefore, in order to convert between the two kinds
+of time, one needs to know when leap seconds were added to the UTC time.  This
+information is maintained within the file ``leap\_seconds.dat'' in the
+directory given by the environment variable TIME\_CONV.
+
+Some operating systems, such as VMS and MacOS, keep track only of local
+time, not UTC.  In such cases, one can store the difference in hours
+(local-UTC) in the file ``local\_diff.dat'' in the same TIME\_CONV directory
+as ``leap\_seconds.dat'' above.  For example, for U.S. Eastern Standard Time,
+this file would contain the value -5.
+
+If the computer is running on GMT rather than local time, one can signify this
+by adding a second line to the ``local\_diff.dat'' file with the letters
+``GMT''.  For example, if one is on the east coast of the United States during
+winter, and the computer is set up to use GMT, then the file would contain the
+lines
+\begin{quote}
+\begin{verbatim}
+-5
+GMT
+\end{verbatim}
+\end{quote}
+When daylight saving time is in effect this would be changed to reflect this.
+
+It is not necessary for ``leap\_seconds.dat'' and ``local\_diff.dat'' to be in
+the same directory.  One can define TIME\_CONV to be a set of directories,
+using the same format one would use for IDL\_PATH.  That way, one can have a
+single ``leap\_seconds.dat'' file which is common among a number of computers
+(e.g. through NFS or mirror), and a separate ``local\_diff.dat'' file for each
+computer.
+
+Note that if time differences between observations are needed to an accuracy of
+a second and the observations are separated by more than a day then the UTC
+times should be converted to TAI before differencing in case there is an
+intervening leap-second.
+
+There are three formats that the CDS software uses for UTC, all of which are
+calendar-based.  These are:
+\begin{description}
+\item[Internal:]
+Referred to as ``INT'' in any routine names.  A structure containing the
+following elements as longword integers:
+\begin{quotetable}{lp{5in}}
+MJD	&	The Modified Julian Day (MJD) number.  This is defined as the
+		ordinary Julian Day (JD) number minus 2400000.5.  The ``.5''
+		represents the fact that MJD numbers begin at midnight, whereas
+		JD numbers begin at noon.\\
+TIME	&	The time of day, in milliseconds since the beginning of the
+		day.\\
+\end{quotetable}
+\item[External:]
+Referred to as ``EXT'' in any routine names.  A structure containing the
+elements, YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, and MILLISECOND as shortword
+integers.
+\item[String:]
+Referred to as ``STR'' in any routine names.  A calendar date in ASCII string
+format.  This format is subdivided into the following subcategories.
+\begin{description}
+\item[CCSDS:]
+A string variable containing the calendar date in the format recommended by the
+Consultative Committee for Space Data Systems (ISO~8601), e.g.
+\begin{quote}
+``1988-01-18T17:20:43.123Z''
+\end{quote}
+It should be noted that the ``Z'' delimiter at the end of the string explicitly
+denotes that the time is in coordinated universal time.
+\item[ECS:]
+A variation on the CCSDS format used by the EOF Core System.  The ``T'' and
+``Z'' separators are eliminated, and slashes are used instead of dashes in the
+date, e.g.
+\begin{quote}
+``1988/01/18 17:20:43.123''
+\end{quote}
+\item[VMS:]  Similar to that used by the VMS operating system, this format uses
+a three-character abbreviation for the month, and rearranges the day and the
+year, e.g.
+\begin{quote}
+``18-JAN-1988 17:20:43.123''
+\end{quote}
+\item[STIME:]  Based on !STIME in IDL, this format is the same as the VMS
+format, except that the time is only given to 0.01~second accuracy, e.g.
+\begin{quote}
+``18-JAN-1988 17:20:43.12''
+\end{quote}
+\end{description}
+Other string types may be added in the future.
+\end{description}
+
+\section{Procedures}
+
+The following procedures are used to convert between the different time
+formats:
+\begin{quotetable}{p{1.5in}p{4in}}
+OBT2TAI	&	Converts the 6-byte SoHO on-board time (OBT/LOBT) to TAI
+		format.\\
+	&	\\
+TAI2UTC	&	Converts TAI times to any one of the CDS UTC formats.\\
+UTC2TAI	&	Converts any one of the CDS UTC formats to TAI.\\
+	&	\\
+INT2UTC	&	Converts internal time to either external or CCSDS format.\\
+UTC2INT	&	Converts either external or CCSDS time to internal format.\\
+	&	\\
+STR2UTC	&	Converts string time to either internal or external format.\\
+UTC2STR	&	Converts either internal or external time to string format.
+\end{quotetable}
+In addition, there are also the following routines:
+\begin{quotetable}{p{1.5in}p{4in}}
+UTC2DOW	&	Calculates the day of the week from any of the UTC formats.\\
+UTC2DOY	&	Calculates the day of the year from any of the UTC formats.\\
+	&	\\
+GET\_UTC&	Gets the current UTC date/time from the system clock in any
+		one of the CDS UTC formats.\\
+	&	\\
+CHECK\_INT\_TIME &	Checks the internal time for consistency.\\
+CDS2JD	&	Calculate full Julian day equivalent of CDS date/time.\\
+LOCAL\_DIFF	&	Returns the difference in hours between local and UTC
+			time.
+\end{quotetable}
+The following are essentially internal routines:
+\begin{quotetable}{p{1.5in}p{4in}}
+DATE2MJD &	Converts dates to MJD numbers.\\
+MJD2DATE &	Converts MJD numbers to dates.\\
+	 &	\\
+GET\_LEAP\_SEC	&	Gets the MJD numbers for days with leap seconds.
+\end{quotetable}
+The following are used in the UTPLOT programs and take no account of leap
+seconds:
+\begin{quotetable}{p{1.5in}p{4in}}
+UTC2SEC &	Converts CDS UTC time format to seconds since MJD=0.\\
+SEC2UTC &	Converts seconds since MJD=0 to CDS UTC format.
+\end{quotetable}
+
+Note that where a routine uses a particular form of time, any of the specified
+formats for that time may be used as input to the routine--the code can
+distinguish the formats.  Thus, in the routine STR2UTC the input variable may
+be any recognized string format, including CCSDS or ECS, plus some variations
+on these.  In UTC2TAI the input can be any of the UTC formats mentioned above
+(INT, EXT, STR).
+
+If there is a choice on output, then this is controlled by keywords.  For
+instance, when using INT2UTC the keywords /EXTERNAL, /CCSDS or /ECS would be
+used to determine the format of the UTC output.
+
+\pagebreak
+
+\appendix
+
+\centerline{\Large\bf Appendices}
+
+\section{Notes on string formats}
+
+The two supported string date/time formats, CCSDS and ECS, are very similar in
+the way that they represent the date.  Each uses a four digit year, followed by
+a numerical month, and then a day of the month.  There are certainly other ways
+to represent dates.  For example, some common representations are:
+\begin{quote}
+January 18, 1988\\
+18-JAN-1988\\
+01/18/88\\
+18/01/88
+\end{quote}
+There are a number of reasons to use the CCSDS/ECS style scheme in preference
+to any of the above variations.  Some of these reasons are as follows:
+\begin{itemize}
+\item
+In the United States it is popular to use a month-day-year format, while in
+Europe a day-month-year format is more common.  Thus, a date such as 01/02/95
+could be interpreted as either January~2, 1995 or as 1~February 1995.  Using
+instead a year-month-day format eliminates this source of confusion.
+\item
+Starting the date off with a full four-character year makes it self-evident
+what the date convention is.  A date such as 01/02/03 could be interpreted as
+January~2,~2003, as 1~February~2003, or as 3~February~2001.
+\item
+Using numerical months instead of character months, together with a
+year-month-day convention, means that dates sorted by date are also sorted
+alphabetically, and vice-versa.  This can be useful in software development.
+\end{itemize}
+
+The CDS string parsing routine STR2UTC is more flexible in the kinds of strings
+that it accepts than UTC2STR is in formatting them.  For example, it can accept
+strings such as \mbox{``88/01/18''}.  However, it is very conservative in how
+it attempts to guess what order is used for the year, month, and day.
+Normally, it assumes that the date is in the format year-month-day.  Automatic
+detection of the two other possibilities, day-month-year or month-day-year, is
+supported only if the month is given as a character string.  For example, the
+string \mbox{``18-Jan-1988''} is automatically recognized.  Both the VMS and
+STIME formats satisfy the above conditions, so they have been added as
+officially supported formats.  In other cases, the day-month-year and
+month-day-year conventions are supported through the keywords /DMY and /MDY.
+
+{\em Note:} Due to popular demand, it was decided that the STR2UTC routine
+should assume that when the month is given as a character string, then the year
+is the {\em last} parameter in the date, and not the first as before.  Thus,
+the software will now automatically recognize dates of the form
+\mbox{``18-Jan-88''} (which it didn't before), {\em but will no longer
+automatically support dates such as \mbox{``88-Jan-18''}}.  This is a
+significant departure from the previous behavior.  There are two ways that this
+can be overcome---i.e. two ways that dates with a character month and beginning
+with a year can be supported:
+\begin{enumerate}
+\item
+Give the year with all four digits.
+\item
+Use the keyword /YMD.
+\end{enumerate}
+Generally speaking, it is safest to always use a four digit year.
+
+The following table illustrates various date formats which are supported.  It
+is not meant to be an exhaustive list.
+\begin{center}
+\begin{tabular}{ll}
+1995-02-15		&	\\
+1995/02/15		&	\\
+95/02/15		&	\\
+1995-046		& (Day-of-year variation)\\
+15-Feb-95		&	\\
+1995-February-15	&	\\
+15-FEB-1995		&	\\
+02/15/95		& (Only with /MDY keyword)\\
+15/02/95		& (Only with /DMY keyword)\\
+95-Feb-15		& (Only with /YMD keyword)
+\end{tabular}
+\end{center}
+
+\end{document}

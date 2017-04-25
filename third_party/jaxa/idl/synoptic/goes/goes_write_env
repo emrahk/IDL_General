@@ -1,0 +1,4 @@
+setenv GOES_REAL /Volumes/data1/goes/real
+setenv GOES_FITS /Volumes/data1/goes/fits
+setenv GOES_FITS_FINAL /service/goes/fits
+

@@ -1,0 +1,128 @@
+#!/bin/csh -f
+############################################################################
+#
+#  Runs an IDL batch job under the SSW environment
+#
+#  Calling Sequence:
+#     ssw_batch IDLPROG [LOGFILE /date]
+#
+#  20-feb-1996 (S.L.Freeland)  adapted to SSW from Yohkoh idl_batch 
+#                              by Mons Morrison and Sam Freeland
+#  6-Oct-1997  (S.L.Freeland)  derive $SSW from this script path if not set
+#                              explititly or via .cshrc (or /ssw not exist)
+#     
+############################################################################
+
+if ( (!($?SSW)) && (-e /ssw) ) setenv SSW /ssw
+
+###### derive $SSW from this script pathname if not otherwise defined ####
+if (!($?SSW)) then
+  echo "No SSW environmental defined - inferring from this script path"
+  set thisfile=$0
+  set head=`echo $thisfile:h`
+  set tail=`echo $thisfile:t`
+  while (( $head != "" ) && ($tail != "gen"))
+      set thisfile=$head
+      set head=`echo $thisfile:h`     # work your way to the ...gen parent
+      set tail=`echo $thisfile:t`
+  end
+  if ($tail == "gen") then 
+     setenv SSW "$head"  
+  else
+     echo "Could not figure out environmental SSW... define and reexcute"
+     exit
+  endif
+endif  
+
+set arglist=()
+setenv IDL_BATCH_NOFTP 1		# dont check for FTP errors
+unsetenv IDL_BATCH_REMOVE		# default is not to remove
+set remove="0"
+
+foreach argn ($argv)
+   switch ($argn)
+      case /ftp:
+            unsetenv IDL_BATCH_NOFTP         
+         breaksw
+      case /mon: 
+      case /monitor:
+         setenv IDL_BATCH_MONITOR 1
+         breaksw
+      case /not
+      case /notify
+         setenv IDL_BATCH_NOTIFY 1
+         breaksw
+      case /nonotify:
+      case /nonot:
+         unsetenv IDL_BATCH_NOTIFY
+         breaksw
+      case /nomon:
+      case /nomonitor:
+         unsetenv IDL_BATCH_MONITOR
+         breaksw
+      case /noftp:
+         setenv IDL_BATCH_NOFTP 1		# dont check for FTP errors
+         breaksw
+      case /nounix:
+         setenv IDL_BATCH_NOUNIX 1		# dont check for UNIX errors
+         breaksw
+      case /remove:
+         set remove="1"				# remove jobs/logs if success success
+         breaksw
+      case /noremove:
+         set remove="0"
+         breaksw
+      default:
+         set arglist=($arglist $argn)	# pass on
+         breaksw
+   endsw
+end
+         
+setenv IDL_BATCH_RUN $arglist[1]
+set    IDL_BATCH_RUN = ($arglist[1])
+
+if ($#arglist < 2)  then
+   set OUTFIL = "~/IDL_BATCH_RUN"
+else
+   set OUTFIL = $arglist[2]
+endif
+
+if ($#arglist == 3) set OUTFIL = $OUTFIL`$SSW/gen/bin/date2fid`
+
+setenv IDL_BATCH_LOGFIL $OUTFIL
+
+unalias rm
+rm -f $OUTFIL
+
+source $SSW/gen/setup/setup.ssw  >& $OUTFIL
+
+# ----------- slf 13-aug-93 - add idl env context setup section
+setenv   ssw_nomore 1		# disable more-like behavior
+setenv   ssw_nox    1		# not attached to an X-terminal 
+setenv   ssw_batch  1		# batch mode flag slf, 4-sep-1993
+unsetenv ssw_fast		# make it slow if batch, slf, 29-aug-94
+unsetenv ssw_autobin		# dont run binary startup 
+# -----------
+
+unalias csh
+csh -f $SSW/gen/setup/ssw_idl nox $SSW/gen/bin/idl_batch_run >>& $OUTFIL
+
+chmod 777 $OUTFIL
+
+# Sam Freeland - optionally run monitor program to check IDL log
+#                for normal / abnormal termination (sends e-mail if problem)
+#
+if ($?IDL_BATCH_MONITOR) then 
+   set monitor_pro=$OUTFIL.pro
+   set mailnorm=($?IDL_BATCH_NOTIFY)
+   echo check_log, '"'$OUTFIL'"', mailnorm=$mailnorm ,remove=$remove, job='"'$IDL_BATCH_RUN'"'  >  $monitor_pro
+   echo end 		                              >>  $monitor_pro
+   $ys/gen/script/idl_batch $monitor_pro $monitor_pro.log /nonotify /nomonitor
+   /bin/rm -f $monitor_pro $monitor_pro.log
+else
+   if ($?IDL_BATCH_NOTIFY) then
+       echo "IDL_BATCH is done running program $1" | mail $user
+   endif
+endif
+
+exit

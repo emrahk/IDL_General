@@ -1,0 +1,187 @@
+;       Version 1, Liyun Wang, NASA/GSFC, October 19, 1994
+;          Incorporated into the CDS library
+;       Version 2, Liyun Wang, NASA/GSFC, November 18, 1994
+;          Added features of rotating a point or a region;
+;          All conversions of coordinate systems are done via CNVT_COORD
+;             routine, common block IMG_SCALE is removed;
+;          Added the capability of fitting the limb and finding the center of
+;             the solar disc
+;       Version 2.1, Liyun Wang, NASA/GSFC, December 23, 1994
+;          Made rasters plotted against the displayed image with
+;             respect to the time when the image was shot.
+;       Version 2.2, Liyun Wang, NASA/GSFC, December 27, 1994
+;          Added feature of plotting grids parallels and meridians on
+;             the solar disc
+;       Version 3, Liyun Wang, NASA/GSFC, January 25, 1995
+;          Generized the pointing widget base siutable for any SOHO instrument
+;          Separated codes for pointing and limb-fitting from the main
+;             program code.
+;          Take out the CDS_RASTER keyword parameter, replaced it with a more
+;             general keyword parameter POINT_STC.
+;       Version 3.1, Liyun Wang, NASA/GSFC, February 28, 1995
+;          Made it capable of reading FITS files that have binary tables
+;          Pointing can be done in a zoomed-in window now
+;          Added elliptical limb fitting option
+;       Version 3.2, Liyun Wang, NASA/GSFC, March 15, 1995
+;          Image displayed with axes around it if data coordinate system can
+;             be established
+;          Pointing criteria is imposed if the pointing area has to be off limb
+;          User is warned if any of the pointing area is not pointed
+;       Version 3.3, Liyun Wang, NASA/GSFC, April 27, 1995
+;          Added GIF output option
+;       Version 3.4, Liyun Wang, NASA/GSFC, May 9, 1995
+;          Added feature of differentially rotating forward (backward)
+;             points on the east (west) limb
+;          Made start time and image obsvervation time editable
+;          Added feature of box-shaped cursor
+;          Made it capabile of reading in GIF images (useful when only
+;             the GIF format of the latest solar images are available)
+;          Started using the new version of XGET_SYNOPTIC (which has no
+;             COMMON blocks in its main and event handler routines)
+;          Allowed the user to select FITS files from his/her own
+;             directory
+;          Added option to set relative size of displayed image
+;       Version 3.5, Liyun Wang, NASA/GSFC, May 15, 1995
+;          Improved the on-line help system
+;       Version 3.6, Liyun Wang, NASA/GSFC, May 31, 1995
+;          Added feature of locking up image orientation so that
+;             coordinates of the image follow any image manipulation
+;             operation
+;          Added feature of stacking images for easy retreiving
+;          Made cursor be markable via the middle or right mouse button
+;       Version 3.7, August 10, 1995, Liyun Wang, NASA/GSFC
+;          Allowed the string of image source or image type to be shown
+;       Version 3.8, August 16, 1995, Liyun Wang, NASA/GSFC
+;          Made it possible to directly access the SOHO summary data
+;          Can enter coordinates of a point and show it on the image
+;          Added the capability of modifying FITS headers to include
+;             the scaling and solar center info from the limbfitting result
+;       Version 3.9, October 10, 1995, Liyun Wang, NASA/GSFC
+;          Started using XPS_SETUP to handle making hard copies in PS format
+;       Version 4.0, October 23, 1995, Liyun Wang, NASA/GSFC
+;          Made images saved in the stack retrievable via image icons
+;          Made the default starting directory for loading GIF files
+;             or personal FITS files be current working directory
+;          Removed the option to retain loaded images in a separate window
+;          Added option for cursor tracking
+;       Version 4.1, November 2, 1995, Liyun Wang, NASA/GSFC
+;          Added interface for loading in personal image files
+;          Added display for position angle of the cursor
+;       Version 4.2, November 15, 1995, Liyun Wang, NASA/GSFC
+;          Added image smooth and edge detect option
+;          Made image profile to be shown in draw widget window
+;       Version 4.3, November 27, 1995, Liyun Wang, NASA/GSFC
+;          Added image-overlay feature
+;       Version 4.4, December 28, 1995, Liyun Wang, NASA/GSFC
+;          Added feature to allow pointing structure to be sent to and
+;             received from planning tool
+;       Version 4.5, February 26, 1996, Liyun Wang, NASA/GSFC
+;          Private data path can be default to PRIVATE_DATA if this env
+;             variable is defined
+;          Fixed bug that IDL working dir may be changed when navigating
+;             through "personal" data paths
+;          Boxed cursor is now default to that reflecting the actual
+;             pointing area defined in POINT_STC
+;          Modified such that upon loading a new image, current zoommed-in
+;             image is zoommed out implicitly
+;       Version 4.6, March 5, 1996, Liyun Wang, NASA/GSFC
+;          Changed button labels for image time and study time
+;          Fixed a bug data type being unrecorded
+;          Automatically scaling and loading correct color table of
+;             the SOHO EIT images
+;          Added SOHO EIT color tables in color table list
+;          Added an image manipulating button for log scaling the image
+;       Version 4.7, March 12, 1996, Liyun Wang, NASA/GSFC
+;          Added a switch button to control point of view (Earth or SOHO)
+;          Better identified image type and source
+;          Point of view is set automatically when loading a new image
+;       Version 4.8, March 13, 1996, Liyun Wang, NASA/GSFC
+;          Added feature of better adjusting color table without
+;             calling XLOADCT
+;       Version 4.9, March 19, 1996, Liyun Wang, NASA/GSFC
+;          Added an option of plotting a raster position over the
+;             displayed image
+;          Fixed a bug in reading a new column from a FITS file with
+;             binary tables
+;          Fixed a bug in changing directory path and filter for
+;             selecting personal data
+;       Version 4.10, March 27, 1996, Liyun Wang, NASA/GSFC
+;          Added interface to SOHO private data directory
+;          Made it more robust when loading a new file
+;       Version 4.11, April 1, 1996, Liyun Wang, NASA/GSFC
+;          Added the FOV keywords for plotting a fixed field of view
+;          Added check against the attemp of trying to rotate a point
+;             or region which is outside the solar disc
+;          Added RADIUS tag in the CSI structure
+;          Utilized a new widget program for adjusting arbitrary study
+;             or imaging time
+;          Added advanced/novice mode switching feature
+;       Version 4.12, April 19, 1996, Liyun Wang, NASA/GSFC
+;          Added widget window dump option for machines running UNIX
+;          Fixed a few bugs in Pointing Tool
+;          Applied EIT degridding algorithm
+;       Version 4.13, May 29, 1996, Liyun Wang, NASA/GSFC
+;          Fixed problem when run on a 24-bit color display
+;       Version 4.14, July 15, 1996, Liyun Wang, NASA/GSFC
+;          Auto log scaled images from Yohkoh SXT, MLSO, PDMO
+;       Version 4.15, August 28, 1996, Liyun Wang, NASA/GSFC
+;          Fixed a problem that CRPIX1 and CRPIX2 was treated as the
+;             reference pixel based on (0,0), should be (1,1) all the
+;             time as in the FITS specification
+;          Zoomed-in image is displayed with a better scale
+;       Version 4.16, December 4, 1996, Liyun Wang, NASA/GSFC
+;          Removed restriction of switching images on stack while in
+;             zoom-in mode
+;          Added option button to over plot MDI high-res field of view
+;          Added option to dump main image window in PS format
+;       Version 4.17, December 6, 1996, Liyun Wang, NASA/GSFC
+;          Added option to remove a selected image from image stack
+;       Version 4.18, February 11, 1997, Liyun Wang, NASA/GSFC
+;          Added option to spawn an image window and to quit with
+;             image window retained
+;          Added option to rotate points on central meridian
+;       Version 4.19, February 20, 1997, Liyun Wang, NASA/GSFC
+;          Added "Recover" button when called from the Planning Tool
+;          Removed novice/advanced mode
+;       Version 4.20, March 6, 1997, Liyun Wang, NASA/GSFC
+;          Implemented differential rotation indicator for any constant
+;             longitudinal points and points at the same Solar X value
+;          Replaced the "Recover" button with "Refresh" when not
+;             called from the Planning Tool (and "Refresh Display" is
+;             removed from the "Misc" menu in this case)
+;       Version 4.21, April 1, 1997, Liyun Wang, NASA/GSFC
+;          Allowed OBS_TIME field to be editable
+;          Fixed a bug occurred during plotting off_limb rasters
+;       Version 4.22, June 3, 1997, Liyun Wang, NASA/GSFC
+;          Modified such that pointing is updated if called again
+;             with another pointing structure while IMAGE_TOOL is
+;             still running
+;          Improved cursor plotting scheme
+;       Version 4.23, July 30, 1997, Liyun Wang, NASA/GSFC
+;          Added AUTO_PLOT keyword to be used with POINT_STC input keyword
+;       Version 5.0, September 8, 1997, Liyun Wang, NASA/GSFC
+;          Major changes on interface as well as on functionality:
+;          1) Put all available tools under one pull down menu "Tools"
+;          2) Simplified the procedure to zoom in/out and to position
+;             the FOV box in Poiting Tool (by getting rid of call to
+;             BOX_CURSOR)
+;          3) Made XGET_SYNOPTIC as a built-in tool
+;          4) Added Overlayer Tool
+;          5) Improved ploting on image icons as well as in zoom-in window
+;          6) Added option to save current image in FITS format
+;          7) Adopted cw_loadct for color table manipulating
+;          8) Changed and enhanced CSI tag names to conform with the
+;             FITS standards 
+;          9) Allowed read GIF format and save it in FITS format
+;         10) Greatly improved functionality of differential rotation
+;         11) Made full-disk differential rotation available
+;         12) Added contour plot option under Image Manipulation
+;         13) Avoided rebuilding pull-down button when switch back to
+;             image originated from a FITS file with binary table
+;         14) Special treatment to overcome an IDL 5.0 bug that causes
+;             the whole widget window growing whenever a new image is loaded
+;	Version 5.1, October 13, 1998, William Thompson, NASA/GSFC
+;	   Limit the special treatment for the window growing problem mentioned
+;	   above to IDL 5.0, and treat IDL 5.1 and above as before.
+;	Version 6, 14-July-2003, William Thompson, GSFC
+;	   Use environment variable SOHO_ORIENT for MDI field-of-view.

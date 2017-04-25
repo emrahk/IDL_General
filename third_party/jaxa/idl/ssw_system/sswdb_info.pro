@@ -1,0 +1,141 @@
+pro sswdb_info, dbsets, dbenv=dbenv, prefix=prefix, relpath=relpath,$
+		default=default, description=description, dbsize=dbsize, $
+		environ=environ, table=table, header=header, $
+                make_form=make_form, status=status, pattern=pattern, $
+                loud=loud
+;+
+;   Name: sswdb_info
+;
+;   Purpose: return info about SSWDB data bases (sizes, descriptions...)
+;
+;   Input Parameters:
+;      dbsets - desired dbsets, either ENV name or relative path (def=all)
+;
+;   Keyword Parameters:
+;      all output keywords map to DBSETS (user input or all)
+;      dbenv   - (out) environmental names for DBSETS 
+;      prefix  - (out) file prefix for DBSETS, if any
+;      relpath - (out) relative pathname (relative to $SSWDB or env)
+;      default - (out) flag if 'suggested' dbase (yes/no) (not yet used)
+;      description (out) one line description
+;      environ - (out) - local translation of dbenv
+;      status - (out) - success flag, 0=> no matching sets found
+;      pattern - (in) - one or more patterns to match
+;
+;   History:
+;      25-Jan-1999 - S.L.Freeland  - for WWW and local sswdb config.
+;      27-Jan-1999 - S.L.Freeland  - fixed teeny bug (kept it from working...)
+;      23-Jan-2001 - S.L.Freeland -  changed cgi pointer
+;       6-Feb-2001 - S.L.Freeland -  added STATUS output
+;-  
+status=0                                         ; init=>problem
+loud=keyword_set(loud)
+if n_elements(dbsets) eq 0 then dbsets=''
+size_file=concat_dir('$SSW_GEN_SETUP','sswdb_sizes.dat')
+desc_file=concat_dir('$SSW_GEN_SETUP','sswdb_descriptions.dat')
+
+sizes=rd_tfile(size_file,nocom=';')
+csizes=str2cols(sizes)
+strtab2vect, csizes, senv, dbsize              
+
+dbdatax=rd_tfile(desc_file,nocom='#')
+dbdatax=str2cols(dbdatax,';',/unaligned,/trim)
+dbdata=strarrcompress(dbdatax)
+strtab2vect, dbdata, dbenv, prefix, relpath, default, description 
+
+if keyword_set(pattern) then begin 
+   spatt=pattern
+   if n_elements(pattern) eq 1 then spatt=str2arr(pattern)
+   spatt=strupcase(spatt)
+   patmat=intarr(n_elements(relpath)) +1          ; init boolean vector
+
+   for i=0,n_elements(spatt)-1 do begin 
+      patmat=patmat and $
+             (strpos(strupcase(relpath),spatt(i)) ne -1 or $
+             strpos(strupcase(dbenv),  spatt(i)) ne -1 or $
+             strpos(strupcase(description), spatt(i)) ne -1)
+
+   endfor
+   patss=where(patmat,sscnt)
+   case sscnt of
+      0: begin
+            box_message,'No matches for input pattern, returning..'
+            return
+         endcase
+      1:
+      else: if loud then box_message,'More than one $SSWDB set matches your pattern..
+   endcase
+   dbsets=dbenv(patss)     
+endif
+
+if not keyword_set(dbsets) then dbsets = dbenv
+nout=n_elements(dbsets)
+if nout eq 0 then begin
+  box_message,'Nothing to return, exiting...'
+  return
+endif
+
+ss=-1
+
+
+for i=0,n_elements(dbsets)-1 do begin
+  ss=[ss, (where(strupcase(dbsets(i)) eq strupcase(dbenv) $
+	      or strupcase(dbsets(i)) eq strupcase(relpath)))(0)]
+endfor  
+
+sss=where(ss ne -1,sscnt)
+
+if sscnt eq 0 then begin
+   box_message,'No matches for dbsets, returning...'
+   return
+endif
+
+status=1
+dbsize=float(dbsize(ss(sss)))
+strtab2vect, dbdata(*,ss(sss)), dbenv, prefix, relpath, default, description 
+
+sdbsize=string(dbsize,format='(f10.1)')
+environ=get_logenv(dbenv,/case_ignore)         ;- local translation
+
+rec=default eq 'yes'
+
+delimit='  '
+dlen=strlen(delimit)
+
+dbenv=reform(([[strupcase(dbenv)],[strlowcase(dbenv)]]) $
+	   (lindgen(n_elements(dbenv)),dbenv eq relpath))
+
+header=strpad('Size(MB)',max(strlen(sdbsize))+dlen,/after)        + $
+       strpad('Description',max(strlen(description))+dlen,/after) + $
+       strpad('Environ.',max(strlen(dbenv))+dlen,/after)          + $
+       strpad('Rel.Path',max(strlen(relpath))+dlen,/after)
+
+table=strjustify(sdbsize) + delimit + strjustify(description) + delimit + $
+      strjustify(dbenv)   + delimit + strjustify(relpath) 
+
+if keyword_set(make_form) then begin 
+   hdoc=concat_dir('path_http','sswdb_configure.html')
+   html_doc,hdoc,/header
+   htmltab=str2cols([header,table],/trim)
+   sscomp=where(strpos(reform(htmltab(1,*)),'DBASE') ne -1,ccnt)
+   if ccnt gt 0 then htmltab=html_highlight(htmltab,sscomp, color='red')
+   rec=where(default eq 'yes',rcnt)
+   recss=rem_elem(rec,sscomp,rcnt)
+   selcol=strarr(data_chk(htmltab,/ny))+'*'
+   selcol(1:*)='<input type="checkbox" name="' + str_replace(dbenv,'/','$')+ '">'
+   htmltab=[transpose(selcol),htmltab]
+   file_append,hdoc,$
+       ['<h1> SolarSoft Data Base (SSWDB) Configuration Form</h1>', $
+        '<FORM name="main" method="POST" action="../cgi-diapason/sswdb_install.sh"><p>']   
+   file_append,hdoc, $
+      ['<b><INPUT TYPE="submit" VALUE="Generate SITE configuration file">', $
+       '   <INPUT TYPE="reset" VALUE="Reset"> (to re-initialize all fields)</b><P>']
+   
+   file_append,hdoc,strtab2html(htmltab,/row0header,/right)
+   file_append,hdoc,'<p></FORM>'
+   file_append,hdoc,'<em>Auto generated by sswdb_info.pro, by S.L.Freeland, Last Run: ' + systime()+'</em>'
+   html_doc,hdoc,/trailer
+endif
+
+return
+end
